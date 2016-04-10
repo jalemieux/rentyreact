@@ -2,7 +2,7 @@
 React = require('react');
 
 var Signout = React.createClass({
-  render() {
+  render: function() {
     return (
       <div></div>
     );

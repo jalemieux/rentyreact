@@ -44,7 +44,7 @@ var PropertyNew = React.createClass({
     console.log(this);
 
   },
-  render() {
+  render: function() {
     return (
     <div className="row">
       <div className="col-sm-12 col-lg-6">

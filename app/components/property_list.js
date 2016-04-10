@@ -25,7 +25,7 @@ var Properties = React.createClass({
   newPropertyClick: function() {
     this.context.router.push('/properties/new');
   },
-  render() {
+  render: function() {
     var properties = this.state.properties.map(function(propertyData){
       //console.log(propertyData);
       return (

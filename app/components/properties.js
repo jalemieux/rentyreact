@@ -8,7 +8,7 @@ var Properties = React.createClass({
   getInitialState: function() {
     return {properties: PropertiesData };
   },
-  render() {
+  render: function() {
     var properties = this.state.properties.map(function(propertyData){
       return (
         <Property data={propertyData} />

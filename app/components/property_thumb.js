@@ -42,7 +42,7 @@ var Property = React.createClass({
             <p>vacancy: {this.props.data.vacancyStatus} | listing status: {this.props.data.listingStatus}</p>
             <p>net monthly income: {this.props.data.incomeNet}</p>
             {tenantState}
-            <p><Link to={`/properties/${this.props.data.propertyId}`}>Details</Link></p>
+            <p><Link to={'/properties/' + this.props.data.propertyId}>Details</Link></p>
           </div>
       </div>
     );

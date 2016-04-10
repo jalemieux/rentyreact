@@ -1,7 +1,7 @@
 var React = require('react');
 
 var Messages = React.createClass({
-  render() {
+  render: function() {
     return (
       <div></div>
     );

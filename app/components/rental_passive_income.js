@@ -90,7 +90,7 @@ var RentalPassiveIncome = React.createClass({
       monthlyPmtInterest: details.interest / 12,
       monthlyPmtPrincipal: details.principal / 12
     });
-
+    document.getElementById("cashflowStatement").scrollIntoView({ block: 'start', behavior: 'smooth'});
   },
   handleOccupancyRateChange: function(e){
     this.setState( { occupancyRate: (e.target.value)});
@@ -162,7 +162,7 @@ var RentalPassiveIncome = React.createClass({
             </div>
           </div>
           <div className="col-xs-12 col-sm-6">
-            <div className="row">
+            <div id="cashflowStatement" className="row">
               <div className="col-lg-12">
                 <div className="panel panel-default">{/* cashflow */}
                   <div className="panel-heading">

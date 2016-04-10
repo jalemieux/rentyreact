@@ -14,11 +14,11 @@ var Account = require("../components/account");
 var Signout = require("../components/signout");
 var Messages = require("../components/messages");
 var RentalPassiveIncome = require("../components/rental_passive_income");
-
+var Blank = require("../components/blank");
 var routes = (
   <Router history={hashHistory}>
     <Route path='/' component={Main}>
-        <IndexRoute component={PropertyList} />
+        <IndexRoute component={RentalPassiveIncome} />
         <Route path="/calc" component={RentalPassiveIncome} />
         <Route path="/properties" component={PropertyList} />
         <Route path="/properties/new" component={PropertyNew} />

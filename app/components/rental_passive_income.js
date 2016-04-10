@@ -112,21 +112,21 @@ var RentalPassiveIncome = React.createClass({
                   <div className="panel-body">
                   <form>
                     <div className="form-group">
-                      <label for="purchasePrice" className="control-label">Purchase Price</label>
+                      <label htmlFor="purchasePrice" className="control-label">Purchase Price</label>
                       <div className="input-group">
                         <div className="input-group-addon">$</div>
                         <input type="number" onChange={this.handlePurchasePriceChange} className="form-control" id="purchasePrice" placeholder="Purchase Price" value={this.state.purchasePrice} />
                       </div>
                     </div>
                     <div className="form-group">
-                      <label for="interestRate" className="control-label">Interest Rate</label>
+                      <label htmlFor="interestRate" className="control-label">Interest Rate</label>
                       <div className="input-group">
                         <input type="number" onChange={this.handleInterestRateChange} className="form-control" id="interestRate" placeholder="Interest Rate" value={this.state.interestRate} />
                         <div className="input-group-addon">%</div>
                       </div>
                     </div>
                     <div className="form-group">
-                      <label for="monthlyRent" className="control-label">Monthly Rent</label>
+                      <label htmlFor="monthlyRent" className="control-label">Monthly Rent</label>
                       <div className="input-group">
                         <div className="input-group-addon">$</div>
                         <input type="number" onChange={this.handleMonthlyRentChange}  className="form-control" id="monthlyRent" placeholder="Monthly Rent" value={this.state.monthlyRent} />
@@ -138,26 +138,6 @@ var RentalPassiveIncome = React.createClass({
                 </div>
               </div>
               <div className="col-lg-12">{/* ancillary input */}
-                {/*<div className="panel panel-default">
-                  <div className="panel-body">
-                    <form>
-                      <div className="form-group">
-                        <label for="occupancyRate" className="control-label">Occupancy Rate</label>
-                        <div className="input-group">
-                          <input type="number" onChange={this.handleOccupancyRateChange} className="form-control" id="occupancyRate" value={this.state.occupancyRate} />
-                          <div className="input-group-addon">%</div>
-                        </div>
-                      </div>
-                      <div className="form-group">
-                        <label for="operatingExpensesRate" className="control-label">Operating Expenses Rate</label>
-                        <div className="input-group">
-                          <input type="number" onChange={this.handleOperatingExpensesRateChange} className="form-control" id="operatingExpensesRate" value={this.state.operatingExpensesRate} />
-                          <div className="input-group-addon">%</div>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>*/}
               </div>
             
             </div>

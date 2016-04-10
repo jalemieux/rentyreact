@@ -8,7 +8,7 @@ var RentalPassiveIncome = React.createClass({
       purchasePrice: 0,
       loanAmount: '',
       cashDownAmount: '',
-      interestRate: 0.04,
+      interestRate: 4,
       monthlyRent: 0,
       cashDownRatio: 0.2,
       mortgagePeriods: 360,
@@ -45,7 +45,7 @@ var RentalPassiveIncome = React.createClass({
     var purchasePrice = this.state.purchasePrice;
     var loanAmount = purchasePrice * ( 1 - this.state.cashDownRatio );
     var cashDownAmount = (purchasePrice - loanAmount)* -1;
-    var rate = this.state.interestRate;
+    var rate = this.state.interestRate / 100;
     var numberPmts = this.state.mortgagePeriods;
     var monthlyRent = this.state.monthlyRent;
     var rentalIncome = monthlyRent * 12;
@@ -121,7 +121,7 @@ var RentalPassiveIncome = React.createClass({
                     <div className="form-group">
                       <label htmlFor="interestRate" className="control-label">Interest Rate</label>
                       <div className="input-group">
-                        <input type="number" onChange={this.handleInterestRateChange} className="form-control" id="interestRate" placeholder="Interest Rate" value={this.state.interestRate} />
+                        <input type="number" min="0" inputMode="numeric" pattern="[0-9]*" onChange={this.handleInterestRateChange} className="form-control" id="interestRate" placeholder="Interest Rate" value={this.state.interestRate} />
                         <div className="input-group-addon">%</div>
                       </div>
                     </div>
@@ -129,7 +129,7 @@ var RentalPassiveIncome = React.createClass({
                       <label htmlFor="monthlyRent" className="control-label">Monthly Rent</label>
                       <div className="input-group">
                         <div className="input-group-addon">$</div>
-                        <input type="number" onChange={this.handleMonthlyRentChange}  className="form-control" id="monthlyRent" placeholder="Monthly Rent" value={this.state.monthlyRent} />
+                        <input type="number" min="0" inputMode="numeric" pattern="[0-9]*" onChange={this.handleMonthlyRentChange}  className="form-control" id="monthlyRent" placeholder="Monthly Rent" value={this.state.monthlyRent} />
                       </div>
                     </div>
                     <button type="button" onClick={this.handleCalc} className="col-sm-offset-2 btn btn-primary">calculate!</button>

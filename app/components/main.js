@@ -1,20 +1,20 @@
 var React = require('react');
-var Navbar = require('./navbar');
+//var Navbar = require('./navbar');
+var NavbarTools = require('./navbar_tools')
 
 var styles = require('../styles/index');
 
 var Main = React.createClass({
-  getInitialStates: function(){
-    return {
-      activeTab: ''
-    }
-  },
+  // getInitialStates: function(){
+  //   return {
+  //     activeTab: ''
+  //   }
+  // },
   render: function () {
     return (
       <div>
-        <Navbar />
+        <NavbarTools />
         <div className="container">
-          <div style={styles.topFiller} />
           {this.props.children}
           <footer>
             <hr/>

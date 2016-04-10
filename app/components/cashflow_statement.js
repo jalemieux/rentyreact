@@ -138,8 +138,7 @@ var RentalPassiveIncome = React.createClass({
                 </div>
               </div>
               <div className="col-lg-12">{/* ancillary input */}
-              </div>
-            
+              </div>      
             </div>
           </div>
           <div className="col-xs-12 col-sm-6">
@@ -209,31 +208,6 @@ var RentalPassiveIncome = React.createClass({
 
                       </tbody>
                     </table>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-12">{/* mortgage details */}
-                <div className="panel panel-default">
-                  <div className="panel-heading">
-                    <h4 className="panel-title">Mortgage Amortization</h4>
-                  </div>
-                  <div className="panel-body">
-                  <table className="table table-hover">
-                    <tbody>
-                      <tr>
-                        <td>Cash Down</td>
-                        <td>{numeral(this.state.cashDownAmount).format('($0,0.00)')}</td>
-                      </tr>
-                      <tr>
-                        <td>Loan Amount</td>
-                        <td>{numeral(this.state.loanAmount).format('($0,0.00)')}</td>
-                      </tr>
-                      <tr>
-                        <td>Monthly Payment</td>
-                        <td>{numeral(this.state.monthlyPmt).format('($0,0.00)')} [i:{numeral(this.state.monthlyPmtInterest).format('($0,0.00)')}|p:{numeral(this.state.monthlyPmtPrincipal).format('($0,0.00)')}]</td>
-                      </tr>
-                    </tbody>
-                  </table>
                   </div>
                 </div>
               </div>

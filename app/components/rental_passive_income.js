@@ -5,11 +5,11 @@ var amortize = require('amortize');
 var RentalPassiveIncome = React.createClass({
   getInitialState: function() {
     return {
-      purchasePrice: 0,
+      purchasePrice: '',
       loanAmount: '',
       cashDownAmount: '',
       interestRate: 4,
-      monthlyRent: 0,
+      monthlyRent: '',
       cashDownRatio: 0.2,
       mortgagePeriods: 360,
 

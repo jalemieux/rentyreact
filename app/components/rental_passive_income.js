@@ -115,7 +115,7 @@ var RentalPassiveIncome = React.createClass({
                       <label htmlFor="purchasePrice" className="control-label">Purchase Price</label>
                       <div className="input-group">
                         <div className="input-group-addon">$</div>
-                        <input type="number" onChange={this.handlePurchasePriceChange} className="form-control" id="purchasePrice" placeholder="Purchase Price" value={this.state.purchasePrice} />
+                        <input type="number" min="0" inputMode="numeric" pattern="[0-9]*" onChange={this.handlePurchasePriceChange} className="form-control" id="purchasePrice" placeholder="Purchase Price" value={this.state.purchasePrice} />
                       </div>
                     </div>
                     <div className="form-group">

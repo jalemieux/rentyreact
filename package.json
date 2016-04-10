@@ -4,9 +4,8 @@
   "description": "managing your rental properties",
   "main": "index.js",
   "scripts": {
-    "blah": "echo \"life is good!\"",
     "production": "webpack -p",
-    "start": "webpack-dev-server  --content-base dist/"
+    "start": "webpack && webpack-dev-server  --content-base dist/"
   },
   "author": "jalemieux",
   "license": "ISC",

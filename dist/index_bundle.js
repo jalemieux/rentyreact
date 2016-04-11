@@ -28352,233 +28352,431 @@
 
 	//affordability.js
 	var React = __webpack_require__(2);
+	var numeral = __webpack_require__(242);
+	var amortize = __webpack_require__(243);
 
 	var Affordability = React.createClass({
-	  displayName: "Affordability",
+	  displayName: 'Affordability',
 
+	  getInitialState: function () {
+	    return {
+	      purchasePrice: '',
+	      mortgageLength: '',
+	      appraisalPrice: '',
+	      cashDown: '',
+	      interestRate: '',
+	      rehabCost: '',
+	      monthlyPretaxIncome: '',
+	      monthlyDebtPayments: '',
+	      cashInBank: ''
+	    };
+	  },
+	  purchasePriceChange: function (e) {
+	    //function content goes here
+	    this.setState({
+	      purchasePrice: e.target.value,
+	      appraisalPrice: e.target.value
+	    });
+	  },
+	  appraisalPriceChange: function (e) {
+	    //function content goes here
+	    this.setState({ appraisalPrice: e.target.value });
+	  },
+	  mortgageLengthChange: function (e) {
+	    //function content goes here
+	    this.setState({ mortgageLength: e.target.value });
+	  },
+	  cashDownChange: function (e) {
+	    this.setState({ cashDown: e.target.value });
+	  },
+	  rehabCostChange: function (e) {
+	    this.setState({ rehabCost: e.target.value });
+	    //function content goes here
+	  },
+	  monthlyPretaxIncomeChange: function (e) {
+	    this.setState({ monthlyPretaxIncome: e.target.value });
+	    //function content goes here
+	  },
+	  monthlyDebtPaymentsChange: function (e) {
+	    this.setState({ monthlyDebtPayments: e.target.value });
+	    //function content goes here
+	  },
+	  cashInBankChange: function (e) {
+	    this.setState({ cashInBank: e.target.value });
+	    //function content goes here
+	  },
 	  render: function () {
 	    return React.createElement(
-	      "div",
+	      'div',
 	      null,
 	      React.createElement(
-	        "div",
-	        { className: "row" },
+	        'div',
+	        { className: 'row' },
 	        React.createElement(
-	          "div",
-	          { className: "col-xs-12 col-sm-6 col-md-4" },
+	          'div',
+	          { className: 'col-xs-12 col-sm-6 col-md-4' },
 	          React.createElement(
-	            "div",
-	            { className: "row" },
+	            'div',
+	            { className: 'row' },
 	            React.createElement(
-	              "div",
-	              { className: "col-lg-12" },
-	              React.createElement("div", { className: "panel panel-primary" })
+	              'div',
+	              { className: 'col-lg-12' },
+	              React.createElement(
+	                'div',
+	                { className: 'panel panel-primary' },
+	                React.createElement(
+	                  'div',
+	                  { className: 'panel-heading' },
+	                  React.createElement(
+	                    'h4',
+	                    { className: 'panel-title' },
+	                    'Numb3rs'
+	                  )
+	                ),
+	                React.createElement(
+	                  'div',
+	                  { className: 'panel-body' },
+	                  React.createElement(
+	                    'h2',
+	                    null,
+	                    React.createElement(
+	                      'small',
+	                      null,
+	                      'Property Details'
+	                    )
+	                  ),
+	                  React.createElement(
+	                    'div',
+	                    { className: 'form-group' },
+	                    React.createElement(
+	                      'label',
+	                      { htmlFor: 'purchasePrice', className: 'control-label' },
+	                      'Purchase Price'
+	                    ),
+	                    React.createElement(
+	                      'div',
+	                      { className: 'input-group' },
+	                      React.createElement(
+	                        'div',
+	                        { className: 'input-group-addon' },
+	                        '$'
+	                      ),
+	                      React.createElement('input', { type: 'number', min: '0', inputMode: 'numeric', pattern: '[0-9]*', onChange: this.purchasePriceChange, className: 'form-control', id: 'purchasePrice', placeholder: '500,000', value: this.state.purchasePrice })
+	                    )
+	                  ),
+	                  React.createElement(
+	                    'div',
+	                    { className: 'form-group' },
+	                    React.createElement(
+	                      'label',
+	                      { htmlFor: 'rehabCost', className: 'control-label' },
+	                      'Rehab Cost'
+	                    ),
+	                    React.createElement(
+	                      'div',
+	                      { className: 'input-group' },
+	                      React.createElement(
+	                        'div',
+	                        { className: 'input-group-addon' },
+	                        '$'
+	                      ),
+	                      React.createElement('input', { type: 'number', min: '0', inputMode: 'numeric', pattern: '[0-9]*', onChange: this.rehabCostChange, className: 'form-control', id: 'rehabCost', placeholder: '30,000', value: this.state.rehabCost })
+	                    )
+	                  ),
+	                  React.createElement('hr', null),
+	                  React.createElement(
+	                    'h2',
+	                    null,
+	                    React.createElement(
+	                      'small',
+	                      null,
+	                      'Mortgage Details'
+	                    )
+	                  ),
+	                  React.createElement(
+	                    'div',
+	                    { className: 'form-group' },
+	                    React.createElement(
+	                      'label',
+	                      { htmlFor: 'mortgageLength', className: 'control-label' },
+	                      'Mortgage Length'
+	                    ),
+	                    React.createElement(
+	                      'div',
+	                      { className: 'input-group' },
+	                      React.createElement('input', { type: 'number', min: '0', inputMode: 'numeric', pattern: '[0-9]*', onChange: this.mortgageLengthChange, className: 'form-control', id: 'mortgageLength', placeholder: '30', value: this.state.mortgageLength }),
+	                      React.createElement(
+	                        'div',
+	                        { className: 'input-group-addon' },
+	                        ' years'
+	                      )
+	                    )
+	                  ),
+	                  React.createElement(
+	                    'div',
+	                    { className: 'form-group' },
+	                    React.createElement(
+	                      'label',
+	                      { htmlFor: 'cashDown', className: 'control-label' },
+	                      'Cash Down Rate'
+	                    ),
+	                    React.createElement(
+	                      'div',
+	                      { className: 'input-group' },
+	                      React.createElement('input', { type: 'number', min: '0', inputMode: 'numeric', pattern: '[0-9]*', onChange: this.cashDownChange, className: 'form-control', id: 'cashDown', placeholder: '25', value: this.state.cashDown }),
+	                      React.createElement(
+	                        'div',
+	                        { className: 'input-group-addon' },
+	                        '%'
+	                      )
+	                    )
+	                  ),
+	                  React.createElement(
+	                    'div',
+	                    { className: 'form-group' },
+	                    React.createElement(
+	                      'label',
+	                      { htmlFor: 'interestRate', className: 'control-label' },
+	                      'Interest Rate'
+	                    ),
+	                    React.createElement(
+	                      'div',
+	                      { className: 'input-group' },
+	                      React.createElement('input', { type: 'number', min: '0', inputMode: 'numeric', pattern: '[0-9]*.[0-9]*', onChange: this.interestRateChange, className: 'form-control', id: 'interestRate', placeholder: '4.5', value: this.state.interestRate }),
+	                      React.createElement(
+	                        'div',
+	                        { className: 'input-group-addon' },
+	                        '%'
+	                      )
+	                    )
+	                  ),
+	                  React.createElement(
+	                    'div',
+	                    { className: 'form-group' },
+	                    React.createElement(
+	                      'label',
+	                      { htmlFor: 'appraisalPrice', className: 'control-label' },
+	                      'Appraisal Price'
+	                    ),
+	                    React.createElement(
+	                      'div',
+	                      { className: 'input-group' },
+	                      React.createElement(
+	                        'div',
+	                        { className: 'input-group-addon' },
+	                        '$'
+	                      ),
+	                      React.createElement('input', { type: 'number', min: '0', inputMode: 'numeric', pattern: '[0-9]*', onChange: this.appraisalPriceChange, className: 'form-control', id: 'appraisalPrice', placeholder: '500,000', value: this.state.appraisalPrice })
+	                    )
+	                  ),
+	                  React.createElement('hr', null),
+	                  React.createElement(
+	                    'h2',
+	                    null,
+	                    React.createElement(
+	                      'small',
+	                      null,
+	                      'Current Income, Debts, and Assets'
+	                    )
+	                  ),
+	                  React.createElement(
+	                    'div',
+	                    { className: 'form-group' },
+	                    React.createElement(
+	                      'label',
+	                      { htmlFor: 'monthlyPretaxIncome', className: 'control-label' },
+	                      'Monthly Income Before Taxes'
+	                    ),
+	                    React.createElement(
+	                      'div',
+	                      { className: 'input-group' },
+	                      React.createElement(
+	                        'div',
+	                        { className: 'input-group-addon' },
+	                        '$'
+	                      ),
+	                      React.createElement('input', { type: 'number', min: '0', inputMode: 'numeric', pattern: '[0-9]*', onChange: this.monthlyPretaxIncomeChange, className: 'form-control', id: 'monthlyPretaxIncome', placeholder: '12,000', value: this.state.monthlyPretaxIncome })
+	                    )
+	                  ),
+	                  React.createElement(
+	                    'div',
+	                    { className: 'form-group' },
+	                    React.createElement(
+	                      'label',
+	                      { htmlFor: 'monthlyDebtPayments', className: 'control-label' },
+	                      'Monthly Debt Payments'
+	                    ),
+	                    React.createElement(
+	                      'div',
+	                      { className: 'input-group' },
+	                      React.createElement(
+	                        'div',
+	                        { className: 'input-group-addon' },
+	                        '$'
+	                      ),
+	                      React.createElement('input', { type: 'number', min: '0', inputMode: 'numeric', pattern: '[0-9]*', onChange: this.monthlyDebtPaymentsChange, className: 'form-control', id: 'monthlyDebtPayments', placeholder: '2,000', value: this.state.monthlyDebtPayments })
+	                    )
+	                  ),
+	                  React.createElement(
+	                    'div',
+	                    { className: 'form-group' },
+	                    React.createElement(
+	                      'label',
+	                      { htmlFor: 'cashInBank', className: 'control-label' },
+	                      'Cash In Bank'
+	                    ),
+	                    React.createElement(
+	                      'div',
+	                      { className: 'input-group' },
+	                      React.createElement(
+	                        'div',
+	                        { className: 'input-group-addon' },
+	                        '$'
+	                      ),
+	                      React.createElement('input', { type: 'number', min: '0', inputMode: 'numeric', pattern: '[0-9]*', onChange: this.cashInBankChange, className: 'form-control', id: 'cashInBank', placeholder: '10,000', value: this.state.cashInBank })
+	                    )
+	                  )
+	                )
+	              )
 	            )
 	          )
 	        ),
 	        React.createElement(
-	          "div",
-	          { className: "col-xs-12 col-sm-6" },
+	          'div',
+	          { className: 'col-xs-12 col-sm-6' },
 	          React.createElement(
-	            "div",
-	            { id: "cashflowStatement", className: "row" },
+	            'div',
+	            { id: 'affordabilityMatrix', className: 'row' },
 	            React.createElement(
-	              "div",
-	              { className: "col-lg-12" },
+	              'div',
+	              { className: 'col-lg-12' },
 	              React.createElement(
-	                "div",
-	                { className: "panel panel-default" },
+	                'div',
+	                { className: 'panel panel-default' },
 	                React.createElement(
-	                  "div",
-	                  { className: "panel-heading" },
+	                  'div',
+	                  { className: 'panel-heading' },
 	                  React.createElement(
-	                    "h4",
-	                    { className: "panel-title" },
-	                    "Affordability Matrix"
+	                    'h4',
+	                    { className: 'panel-title' },
+	                    'Affordability Matrix'
 	                  )
 	                ),
 	                React.createElement(
-	                  "div",
-	                  { className: "panel-body" },
+	                  'div',
+	                  { className: 'panel-body' },
 	                  React.createElement(
-	                    "table",
-	                    { className: "table table-hover" },
+	                    'table',
+	                    { className: 'table table-hover' },
 	                    React.createElement(
-	                      "thead",
+	                      'thead',
 	                      null,
 	                      React.createElement(
-	                        "tr",
+	                        'tr',
 	                        null,
-	                        React.createElement(
-	                          "th",
-	                          null,
-	                          "Rental Income"
-	                        ),
-	                        React.createElement(
-	                          "th",
-	                          null,
-	                          numeral(this.state.rentalIncome).format('($0,0.00)')
-	                        )
+	                        React.createElement('th', null),
+	                        React.createElement('th', null)
 	                      )
 	                    ),
 	                    React.createElement(
-	                      "tbody",
+	                      'tbody',
 	                      null,
 	                      React.createElement(
-	                        "tr",
+	                        'tr',
 	                        null,
 	                        React.createElement(
-	                          "td",
+	                          'td',
 	                          null,
-	                          "Vacancy Loss @ ",
-	                          numeral((100 - this.state.occupancyRate) / 100).format('0%'),
-	                          " "
+	                          'Loan Amount'
 	                        ),
 	                        React.createElement(
-	                          "td",
+	                          'td',
 	                          null,
-	                          numeral(this.state.vacancyLoss).format('($0,0.00)')
+	                          numeral(this.state.loanAmount).format('($0,0)')
 	                        )
 	                      ),
 	                      React.createElement(
-	                        "tr",
+	                        'tr',
 	                        null,
 	                        React.createElement(
-	                          "td",
+	                          'td',
 	                          null,
-	                          "Operating Expenses"
+	                          'Total Interest Paid'
 	                        ),
 	                        React.createElement(
-	                          "td",
+	                          'td',
 	                          null,
-	                          numeral(this.state.operatingExpenses).format('($0,0.00)')
+	                          numeral(this.state.totalInterestPaid).format('($0,0.00)')
 	                        )
 	                      ),
 	                      React.createElement(
-	                        "tr",
+	                        'tr',
+	                        null,
+	                        React.createElement('td', null),
+	                        React.createElement('td', null)
+	                      ),
+	                      React.createElement(
+	                        'tr',
 	                        null,
 	                        React.createElement(
-	                          "td",
+	                          'td',
 	                          null,
-	                          "Net Operating Income"
+	                          'PretaxMonthly Payment'
 	                        ),
 	                        React.createElement(
-	                          "td",
+	                          'td',
 	                          null,
-	                          numeral(this.state.netOperatingIncome).format('($0,0.00)')
+	                          numeral(0).format('($0,0.00)')
 	                        )
 	                      ),
 	                      React.createElement(
-	                        "tr",
+	                        'tr',
 	                        null,
+	                        React.createElement('td', null),
 	                        React.createElement(
-	                          "td",
+	                          'td',
 	                          null,
-	                          "Mortgage Interest"
-	                        ),
-	                        React.createElement(
-	                          "td",
-	                          null,
-	                          numeral(this.state.mortgageInterest).format('($0,0.00)')
+	                          numeral(0).format('($0,0.00)')
 	                        )
 	                      ),
 	                      React.createElement(
-	                        "tr",
+	                        'tr',
 	                        null,
+	                        React.createElement('td', null),
 	                        React.createElement(
-	                          "td",
+	                          'td',
 	                          null,
-	                          "Depreciation"
-	                        ),
-	                        React.createElement(
-	                          "td",
-	                          null,
-	                          numeral(this.state.depreciation).format('($0,0.00)')
+	                          numeral(0).format('($0,0.00)')
 	                        )
 	                      ),
 	                      React.createElement(
-	                        "tr",
+	                        'tr',
 	                        null,
+	                        React.createElement('td', null),
 	                        React.createElement(
-	                          "td",
+	                          'td',
 	                          null,
-	                          "Taxable Income"
-	                        ),
-	                        React.createElement(
-	                          "td",
-	                          null,
-	                          numeral(this.state.taxableIncome).format('($0,0.00)')
+	                          numeral(0).format('($0,0.00)')
 	                        )
 	                      ),
 	                      React.createElement(
-	                        "tr",
+	                        'tr',
 	                        null,
-	                        React.createElement("td", null),
-	                        React.createElement("td", null)
-	                      ),
-	                      React.createElement(
-	                        "tr",
-	                        null,
+	                        React.createElement('td', null),
 	                        React.createElement(
-	                          "td",
+	                          'td',
 	                          null,
-	                          "Net Operating Income"
-	                        ),
-	                        React.createElement(
-	                          "td",
-	                          null,
-	                          numeral(this.state.netOperatingIncome).format('($0,0.00)')
+	                          numeral(0).format('($0,0.00)')
 	                        )
 	                      ),
 	                      React.createElement(
-	                        "tr",
+	                        'tr',
 	                        null,
+	                        React.createElement('td', null),
 	                        React.createElement(
-	                          "td",
+	                          'td',
 	                          null,
-	                          "Annual Debt Service (principal and interest)"
-	                        ),
-	                        React.createElement(
-	                          "td",
-	                          null,
-	                          numeral(this.state.annualDebtService).format('($0,0.00)')
-	                        )
-	                      ),
-	                      React.createElement(
-	                        "tr",
-	                        null,
-	                        React.createElement(
-	                          "td",
-	                          null,
-	                          "Pretax Cashflow"
-	                        ),
-	                        React.createElement(
-	                          "td",
-	                          null,
-	                          numeral(this.state.pretaxCashflow).format('($0,0.00)')
-	                        )
-	                      ),
-	                      React.createElement(
-	                        "tr",
-	                        null,
-	                        React.createElement(
-	                          "td",
-	                          null,
-	                          React.createElement(
-	                            "strong",
-	                            null,
-	                            "After Tax Cashflow @ ",
-	                            numeral(this.state.taxBracket).format('%')
-	                          )
-	                        ),
-	                        React.createElement(
-	                          "td",
-	                          null,
-	                          React.createElement(
-	                            "strong",
-	                            null,
-	                            numeral(this.state.afterTaxCashFlow).format('($0,0.00)')
-	                          )
+	                          numeral(0).format('($0,0.00)')
 	                        )
 	                      )
 	                    )

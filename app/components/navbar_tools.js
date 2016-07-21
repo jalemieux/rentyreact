@@ -31,6 +31,7 @@ var NavbarTools = React.createClass({
             <ul className="nav navbar-nav">
               <li><Link to="/cashflow" activeClassName="active">cashflow</Link></li>
               <li><Link to="/affordability"  activeClassName="active">affordability</Link></li>
+              <li><Link to="/messages" activeClassName="active">messages</Link></li>
             </ul>
           </div>
         </div>

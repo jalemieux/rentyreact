@@ -7,7 +7,6 @@ var HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
 });
 
 
-
 module.exports = {
   entry: [
     './app/index.js',
@@ -15,15 +14,16 @@ module.exports = {
   ],
   module: {
     loaders: [
-      { // Compile jsx files
-        test: /\.js$/, exclude: /node_modules/, loader: "babel-loader"
-      },
-      
+      { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader"},
+      { test: /\.json$/, loader: "json-loader" }
     ] 
+  },
+  resolve: {
+    modulesDirectories: ['node_modules'],
   },
   output: {
     filename: "index_bundle.js",
-    path: __dirname + '/dist'
+    path: __dirname + '/public'
   },
   plugins: [
     HTMLWebpackPluginConfig,

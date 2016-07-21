@@ -3,6 +3,9 @@ var React = require('react');
 var numeral = require('numeral')
 var amortize = require('amortize');
 
+var css = require('!style!css!../styles/renty.css');
+
+
 var borderTop = {
   borderTop: 'solid'
 }
@@ -134,7 +137,6 @@ var Affordability = React.createClass({
     //function content goes here
   },
   render: function() {
-
     var cashReqMet = '';
     if(this.state.cashBeforeReserve != ''){
       if(this.state.cashBeforeReserve < 0){

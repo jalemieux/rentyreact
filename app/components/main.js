@@ -1,15 +1,9 @@
 var React = require('react');
-//var Navbar = require('./navbar');
 var NavbarTools = require('./navbar_tools')
 
 var styles = require('../styles/index');
 
 var Main = React.createClass({
-  // getInitialStates: function(){
-  //   return {
-  //     activeTab: ''
-  //   }
-  // },
   render: function () {
     return (
       <div>

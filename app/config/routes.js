@@ -5,6 +5,7 @@ var Route = ReactRouter.Route;
 var hashHistory = ReactRouter.hashHistory;
 var IndexRoute = ReactRouter.IndexRoute;
 var Main = require('../components/main');
+var Home = require("../components/home");
 var Listings = require("../components/listings");
 var PropertyNew = require("../components/property_new");
 var PropertyList = require("../components/property_list");
@@ -21,7 +22,7 @@ var Messages = require("../components/messages");
 var routes = (
   <Router history={hashHistory}>
     <Route path='/' component={Main}>
-        <IndexRoute component={CashflowStatement} />
+        <IndexRoute component={Home} />
         <Route path="/cashflow" component={CashflowStatement} />
         <Route path="/affordability" component={Affordability} />
         <Route path="/messages" component={Messages} />

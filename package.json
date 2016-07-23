@@ -7,7 +7,7 @@
     "production": "webpack -p",
     "build": "webpack",
     "start-feathersjs": "babel-node src/",
-    "start": "webpack && webpack-dev-server  --content-base dist/"
+    "start": "webpack && webpack-dev-server  --content-base public/"
   },
   "author": "jalemieux",
   "license": "ISC",
@@ -24,13 +24,13 @@
     "react-router": "^2.0.1"
   },
   "devDependencies": {
-    "babel-core": "^6.7.4",
+    "babel-core": "^6.11.4",
     "babel-loader": "^6.2.4",
     "babel-preset-react": "^6.5.0",
     "css-loader": "^0.23.1",
-    "html-webpack-plugin": "^2.14.0",
+    "html-webpack-plugin": "^2.22.0",
     "style-loader": "^0.13.1",
-    "webpack": "^1.12.14",
+    "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1"
   }
 }

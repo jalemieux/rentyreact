@@ -5,13 +5,13 @@ var Route = ReactRouter.Route;
 var hashHistory = ReactRouter.hashHistory;
 var IndexRoute = ReactRouter.IndexRoute;
 var Main = require('../components/main');
-// var Listings = require("../components/listings");
-// var PropertyNew = require("../components/property_new");
-// var PropertyList = require("../components/property_list");
-// var PropertyDetails = require("../components/property_details");
-// var Applications = require("../components/applications");
-// var Account = require("../components/account");
-// var Signout = require("../components/signout");
+var Listings = require("../components/listings");
+var PropertyNew = require("../components/property_new");
+var PropertyList = require("../components/property_list");
+var PropertyDetails = require("../components/property_details");
+var Applications = require("../components/applications");
+var Account = require("../components/account");
+var Signout = require("../components/signout");
 
 var CashflowStatement = require("../components/cashflow_statement");
 var Blank = require("../components/blank");
@@ -25,7 +25,7 @@ var routes = (
         <Route path="/cashflow" component={CashflowStatement} />
         <Route path="/affordability" component={Affordability} />
         <Route path="/messages" component={Messages} />
-    {/*
+    
         <Route path="/messages" component={Messages} />
         <Route path="/properties" component={PropertyList} />
         <Route path="/properties/new" component={PropertyNew} />
@@ -35,7 +35,6 @@ var routes = (
         <Route path='/messages' component={Messages} />
         <Route path='/signout' component={Signout} />
         <Route path='/account' component={Account} />
-    */}
     </Route>
   </Router>
 );

@@ -1,0 +1,16 @@
+/*lease.css*/
+
+.lightWell {
+  background-color: rgb(245,245,245);
+  border-radius: 3px;
+  padding: 10px;
+  margin: 10px 0px;
+}
+
+.lightWell h4 {
+  margin: 2px 0px;
+  color: rgb(105,105,105);
+}
+.lightWell p {
+  margin: 2px 0px;
+}

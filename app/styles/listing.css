@@ -1,0 +1,39 @@
+/*active_listings.css*/
+ul.list-inline {
+  padding:0px;
+  margin:0px;
+  font-size: 0.9em;
+  font-weight: 100;
+ }
+/*ul.list-inline li {
+  border-left-width: 1px;
+  border-left-color: rgb(221, 221, 221);
+  border-left-style: solid;
+  box-sizing: border-box;
+  padding:3px 3px 5px 3px;
+  margin-left:-1px;
+}
+ul.list-inline li a {
+  color: inherit;
+  text-decoration: underline;
+}
+ul.list-inline li a:hover {
+  font-weight: bold;
+}
+*/
+
+div.well p {
+  margin: 0px;
+}
+div.well h4 {
+  margin: 5px 0px;
+}
+
+div.well fixed {
+  width: 100px;
+  margin: 5px;
+}
+div.well flex-item {
+  flex-grow: 1;
+  padding: 5px;
+}

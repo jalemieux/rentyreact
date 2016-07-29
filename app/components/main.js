@@ -1,13 +1,11 @@
 var React = require('react');
-var NavbarTools = require('./navbar_tools')
-
-var styles = require('../styles/index');
+var Navbar = require("./navbar");
 
 var Main = React.createClass({
   render: function () {
     return (
       <div>
-        <NavbarTools />
+        <Navbar />
         <div className="container">
           {this.props.children}
           <footer>

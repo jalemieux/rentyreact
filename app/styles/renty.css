@@ -1,3 +1,122 @@
+.testStyles {
+    background-color: yellow;
+}
+.logo {
+  background: url("/images/logo.png") no-repeat 0 11px;
+  padding-left: 35px;
+}
+
+
+navbar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 10px 0px 20px 0px;
+  padding:3px 10px 3px 10px;
+  background: rgba(255,255,255,0.1);
+  text-align: right;
+  font-weight: 400;
+  font-size: 1em;
+  color: white;
+  text-shadow: 1px 1px 2px black;
+  z-index: 500;
+}
+
+navbar a {
+ color: white;
+ text-decoration: underline;
+}
+navbar a:hover {
+  color: white;
+  cursor: pointer;
+}
+navbar a:visited {
+ color: white;
+  cursor: pointer; 
+}
+
+footer {
+  text-align: center;
+}
+
+header {
+  background-color: #263d36;
+  background-image: url("/images/header.jpeg");
+  background-position: center top;
+  background-repeat: no-repeat;
+  opacity: 0.75;
+  background-size: cover;
+  line-height: 1.2;
+  max-width: none;
+  max-height: 300px;
+ padding: 10vw 2em;
+  text-align: center;
+}
+header img {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  display: inline-block;
+  height: 50px;
+  vertical-align: top;
+  width: 50px;
+}
+header h1 {
+  display: inline-block;
+  color: white;
+  font-size: 5em;
+  font-weight: 500;
+  text-shadow: 1px 1px 2px black; 
+}
+
+header p {
+  color: white;
+  font-size: 3em;
+  font-weight: 400;
+  /*text-shadow: 1px 1px 2px black; */
+  background: rgba(0, 0, 0, 0.8);
+  padding: 2px;
+}
+
+header a {
+  border: 1px solid #e81c4f;
+  border-radius: 290486px;
+  color: white;
+  font-size: 0.6em;
+  letter-spacing: 0.2em;
+  padding: 1em 2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: none 200ms ease-out;
+  transition-property: color, background;
+}
+
+header a:hover {
+  background:  #e81c4f;
+  color: white;
+}
+
+.offer-row {
+  border-bottom: 1px solid rgb(200, 200, 200);
+}
+.offer-box {
+ /*border-right: 1px solid rgb(200, 200, 200); 
+ height: 300px;*/
+}
+h3 {
+  font-weight: 200;
+  font-size: 2em;
+}
+.offer-box p {
+  font-size: 1em;
+}
+
+.logoNav {
+  background: url("/images/logo.png") no-repeat 0 11px;
+  padding-left: 35px;
+}
+
+/* -- old styles below -- */
+
 .prop-thumbnail{
   float: left;
   max-width: 150px;

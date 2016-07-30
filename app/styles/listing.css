@@ -22,18 +22,18 @@ ul.list-inline li a:hover {
 }
 */
 
-div.well p {
+div.lightWell p {
   margin: 0px;
 }
-div.well h4 {
+div.lightWell h4 {
   margin: 5px 0px;
 }
 
-div.well fixed {
+div.lightWell fixed {
   width: 100px;
   margin: 5px;
 }
-div.well flex-item {
+div.lightWell flex-item {
   flex-grow: 1;
   padding: 5px;
 }

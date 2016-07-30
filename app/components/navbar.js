@@ -25,12 +25,15 @@ var Navbar = React.createClass({
           </div>
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul className="nav navbar-nav">
-              <li><Link to="#" activeClassName="active">Properties</Link></li>
+              <li><Link to="/dashboard" activeClassName="active">Dashboard</Link></li>
+              <li><Link to="/properties" activeClassName="active">Properties</Link></li>
               <li><Link to="#" activeClassName="active">Listings</Link></li>
               <li><Link to="#" activeClassName="active">Leases</Link></li>
-              <li><Link to="#" activeClassName="active">Tenants</Link></li>
+              <li><Link to="#" activeClassName="active">Financials</Link></li>
             </ul>
             <ul className="nav navbar-nav navbar-right user-nav">
+              <li><a href="#">Events <span className="label label-warning">3</span> </a></li>
+              <li><a href="#">Messages <span className="label label-danger">2</span> </a></li>
               <li className="dropdown">
                 <a href="#" className="dropdown-toggle" data-toggle="dropdown">
                   <span>Account</span>

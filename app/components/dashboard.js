@@ -2,58 +2,65 @@ var React = require('react');
 var ActiveListings = require('./active_listings');
 var CurrentLeases = require('./current_leases');
 var Timeline = require('./timeline');
+var Alerts = require('./alerts');
+var Ledger = require('./ledger');
+var Notifications = require('./notifications');
+
 require("../styles/dashboard.css");
+var pieChartData = require("../data/pie_chart_data");
 
 var PieChart = require("react-chartjs").Pie;
 
+var PieChart = require("react-chartjs").Pie
+
 
 var Dashboard = React.createClass({
-  
+  getInitialState: function() {
+      return {
+        pieChartData: pieChartData,
+      };
+    },
   render: function() {
-    var data =  [
-    {
-      value: 25,
-      label: 'Java',
-      color: '#811BD6'
-   },
-   {
-      value: 10,
-      label: 'Scala',
-      color: '#9CBABA'
-   },
-   {
-      value: 30,
-      label: 'PHP',
-      color: '#D18177'
-   },
-   {
-      value : 35,
-      label: 'HTML',
-      color: '#6AE128'
-   }
-    ];
-    var options = {
-    };
-    
+    var options = {};
     return (
       <div>
-      <div className="row">
-        <div className="col-sm-12 col-md-8 box1">
-          <h4>Active Listing</h4>
-          <ActiveListings />
-        </div> 
-        <div className="col-sm-12 col-md-4 box1">
-          <h4>Current Leases</h4>
-          <CurrentLeases />
-        </div>
-        <div className="col-sm-12 col-md-4 box1">
-          <h4>Timeline</h4>
-          <Timeline />
-        </div>
-        <div className="col-sm-12 col-md-4 box1">
-          <PieChart data={data} options={options} height="auto" width="100%"/>
-        </div>
-      </div>
+          <Notifications />
+          <div className="col-sm-12 col-md-8 noPadding">
+            <div class="row ">
+              <div className="col-sm-12 col-md-12 box1">
+                <h4>Active Listing</h4>
+                <ActiveListings />
+              </div>
+              <div className="col-sm-12 col-md-12 box1">
+                <h4>Financials</h4>
+                <PieChart data={this.state.pieChartData} options={options} />
+              </div>
+            </div>
+          </div>
+          <div className="col-sm-12 col-md-4 noPadding">
+            <div class="row">
+              <div className="col-sm-12 col-md-12 box1">
+                <h4>Current Leases</h4>
+                <CurrentLeases />
+              </div>
+              <div className="col-sm-12 col-md-12 box1">
+                <h4>New Events</h4>
+                <Alerts />
+              </div>
+              <div className="col-sm-12 col-md-12 box1">
+                <h4>Events Timeline</h4>
+                <Timeline />
+              </div>
+              <div className="col-sm-12 col-md-12 box1">
+                <h4>Ledger</h4>
+                <Ledger />
+              </div>
+              <div className="col-sm-12 col-md-12 box1">
+                <h4>Financial</h4>
+                <Ledger />
+              </div>
+            </div>
+          </div>
       </div>
     )
   }

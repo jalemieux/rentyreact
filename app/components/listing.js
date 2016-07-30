@@ -8,7 +8,7 @@ var Listing = React.createClass({
       var openhouse = <small>Open house scheduled for <a href='#'>{this.props.data.openhouse}</a></small>;
     }
     return (
-      <div className="well">
+      <div className="lightWell">
         <div className="row">
           <div className="col-sm-1 col-md-4">
             <img className="img-responsive" src="/images/3933paladindr.jpeg" />

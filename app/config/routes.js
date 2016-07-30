@@ -5,9 +5,10 @@ var Route = ReactRouter.Route;
 var hashHistory = ReactRouter.hashHistory;
 var IndexRoute = ReactRouter.IndexRoute;
 var Main = require('../components/main');
-var Dashboard = require("../components/dashboard");
+var Dashboard = require('../components/dashboard');
+var CreateProperty = require('../components/create_property');
+
 // var Listings = require("../components/listings");
-// var PropertyNew = require("../components/property_new");
 // var PropertyList = require("../components/property_list");
 // var PropertyDetails = require("../components/property_details");
 // var Applications = require("../components/applications");
@@ -27,6 +28,8 @@ var routes = (
     */}
     <Route path='/' component={Main}>
         <IndexRoute component={Dashboard} />
+        <Route path="/properties/new" component={CreateProperty} />
+
     {/*
         <Route path="/cashflow" component={CashflowStatement} />
         <Route path="/affordability" component={Affordability} />

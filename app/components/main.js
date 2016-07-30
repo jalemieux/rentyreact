@@ -7,7 +7,9 @@ var Main = React.createClass({
       <div>
         <Navbar />
         <div className="container">
-          {this.props.children}
+          <div className="row">
+            {this.props.children}
+          </div>
           <footer>
             <hr/>
             <p className="text-center">&copy; 2016 renty, Inc.</p>

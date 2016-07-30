@@ -5,9 +5,12 @@
 
 .box1 {
   border: rgb(221,221,221) solid 1px;
-  margin-left: -1px;
   margin-top: -1px;
+  margin-left: -1px;
   padding: 0px 6px;
+}
+div.noPadding {
+  padding: 0px;
 }
 
 .tile {

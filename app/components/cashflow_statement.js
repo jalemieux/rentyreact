@@ -2,9 +2,13 @@ var React = require ('react');
 var numeral = require('numeral');
 var amortize = require('amortize');
 var ReactDOM = require('react-dom');
+var CashflowStatementParameters = require("../components/cashflow_statement_parameters");
+
 var RentalPassiveIncome = React.createClass({
   getInitialState: function() {
     return {
+      showParameters: false,
+
       purchasePrice: 530000,
       loanAmount: '',
       cashDownAmount: '',
@@ -45,19 +49,26 @@ var RentalPassiveIncome = React.createClass({
   handleMonthlyRentChange: function(e){
     this.setState({ monthlyRent: e.target.value });  
   },
+  handleToggleParameters: function(e){
+    if(this.state.showParameters){
+      this.setState({showParameters: false });
+    }else{
+      this.setState({showParameters: true});  
+    }
+  },
   handleChangeInput: function(e){
-    var stateObject = function() {
+     var stateObject = function() {
       returnObj = {};
       console.log();
       returnObj[this.target.id] = this.target.value;
          return returnObj;
     }.bind(e)();
-
     this.setState(stateObject);
-    this.handleCalc();
+
   },
   handleCalc: function() {
     var purchasePrice = this.state.purchasePrice;
+    console.log(this.state.occupancyRate);
     var propertyTax = this.state.purchasePrice * this.state.propertyTaxRate/100 * -1;
     var loanAmount = purchasePrice * ( 1 - this.state.cashDownRatio/100 );
     var cashDownAmount = (purchasePrice - loanAmount)* -1;
@@ -116,8 +127,8 @@ var RentalPassiveIncome = React.createClass({
       taxDue: taxDue,
 
     });
-    var scroll = ReactDOM.findDOMNode(this.refs.cashflowStatement);
-    if(scroll) scroll.scrollIntoView();
+    // var scroll = ReactDOM.findDOMNode(this.refs.cashflowStatement);
+    // if(scroll) scroll.scrollIntoView();
   },
   componentWillMount: function(){
     this.handleCalc();
@@ -129,6 +140,22 @@ var RentalPassiveIncome = React.createClass({
     this.setState( { operatingExpensesRate: (e.target.value) });
   },
   render: function() {
+    var parameters = "";
+    if(this.state.showParameters){
+      parameters = <div className="panel-body">
+              <CashflowStatementParameters
+                  occupancyRate={ this.state.occupancyRate }
+                  handleChangeInput={this.handleChangeInput}
+                  operatingExpensesRate={ this.state.operatingExpensesRate }
+                  hoaFees={ this.state.hoaFees }
+                  taxBracket={ this.state.taxBracket }
+                  cashDownRatio={ this.state.cashDownRatio }
+                  insuranceCost={ this.state.insuranceCost }
+                  depreciationRate={ this.state.depreciationRate }
+                  />
+                  </div>
+    }
+
     return (
       <div>
         <div className="row">
@@ -162,72 +189,15 @@ var RentalPassiveIncome = React.createClass({
                         <input type="number" min="0" inputMode="numeric" ref="monthlyRentInput" pattern="[0-9]*" onChange={this.handleMonthlyRentChange}  className="form-control" id="monthlyRent" placeholder="Monthly Rent" value={this.state.monthlyRent} />
                       </div>
                     </div>
-                    <button type="button" onClick={this.handleCalc} className="col-sm-offset-2 btn btn-primary">calculate!</button>
+                    <div>
+                      <a href="#" onClick={ this.handleToggleParameters }><h5 className="panel-tittle">Advanced Parameters<small> <span className="glyphicon glyphicon-chevron-down"></span></small></h5></a>
+                      { parameters }
+                    </div>
+                    <button type="button" onClick={this.handleCalc} className="col-sm-offset-2 btn btn-primary">update</button>
                   </form>
                   </div>
                 </div>
               </div>
-              <div className="col-lg-12">
-                <div className="panel panel-default">{/* parameters */}
-                  <div className="panel-heading">
-                    <h4 className="panel-tittle">Advanced Parameters</h4>
-                  </div>
-                  <div className="panel-body">
-                    <form>
-                      <div className="form-group">
-                        <label htmlFor="occupancyRate" className="control-label">Occupancy Rate</label>
-                        <div className="input-group">
-                          <input type="number" min="0" inputMode="numeric" ref="occupancyRateInput" pattern="[0-9.]*"  onChange={this.handleChangeInput} className="form-control" id="occupancyRate" placeholder={this.state.occupancyRate} />
-                          <div className="input-group-addon">%</div>
-                        </div>
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="operatingExpensesRate" className="control-label">Operating Expenses Rate</label>
-                        <div className="input-group">
-                          <input type="number" min="0" inputMode="numeric" ref="operatingExpensesRateInput" pattern="[0-9.]*"  onChange={this.handleChangeInput} className="form-control" id="operatingExpensesRate" placeholder={this.state.operatingExpensesRate} />
-                          <div className="input-group-addon">%</div>
-                        </div>
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="operatingExpensesRate" className="control-label">HOA Fees</label>
-                        <div className="input-group">
-                          <input type="number" min="0" inputMode="numeric" ref="hoaFeesInput" pattern="[0-9.]*"  onChange={this.handleChangeInput} className="form-control" id="hoaFees" placeholder={this.state.hoaFees} />
-                          <div className="input-group-addon">%</div>
-                        </div>
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="depreciationRate" className="control-label">Depreciation Rate </label>
-                        (<small>how much of the purchase price qualifies for depreciation</small>)
-                        <div className="input-group">
-                          <input type="number" min="0" inputMode="numeric" ref="depreciationRateInput" pattern="[0-9.]*"  onChange={this.handleChangeInput} className="form-control" id="depreciationRate" placeholder={this.state.depreciationRate} />
-                          <div className="input-group-addon">%</div>
-                        </div>
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="cashDownRatio" className="control-label">Cashdown Ratio</label>
-                        <div className="input-group">
-                          <input type="number" min="0" inputMode="numeric" ref="cashDownRatioInput" pattern="[0-9.]*"  onChange={this.handleChangeInput} className="form-control" id="cashDownRatio" placeholder={this.state.cashDownRatio} />
-                          <div className="input-group-addon">%</div>
-                        </div>
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="taxBracket" className="control-label">Tax Bracket</label>
-                        <div className="input-group">
-                          <input type="number" min="0" inputMode="numeric" ref="taxBracketInput" pattern="[0-9.]*"  onChange={this.handleChangeInput} className="form-control" id="taxBracket" placeholder={this.state.taxBracket} />
-                          <div className="input-group-addon">%</div>
-                        </div>
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="insuranceCost" className="control-label">Insurance Cost</label>
-                        <div className="input-group">
-                          <input type="number" min="0" inputMode="numeric" ref="insuranceCostInput" pattern="[0-9.]*"  onChange={this.handleChangeInput} className="form-control" id="insuranceCost" placeholder={this.state.insuranceCost} />
-                          <div className="input-group-addon">%</div>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>      
             </div>
           </div>
           <div className="col-xs-12 col-sm-6">
@@ -332,7 +302,7 @@ var RentalPassiveIncome = React.createClass({
               <div className="col-lg-12">{/* ROI */}
                 <div className="panel panel-default">
                   <div className="panel-heading">
-                    <h4 className="panel-title"></h4>
+                    <h4 className="panel-title">Return On Investment</h4>
                   </div>
                   <div className="panel-body">
                     <table className="table table-hover">

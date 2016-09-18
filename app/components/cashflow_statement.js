@@ -1,21 +1,21 @@
 var React = require ('react');
 var numeral = require('numeral');
 var amortize = require('amortize');
-
+var ReactDOM = require('react-dom');
 var RentalPassiveIncome = React.createClass({
   getInitialState: function() {
     return {
-      purchasePrice: '',
+      purchasePrice: 530000,
       loanAmount: '',
       cashDownAmount: '',
-      interestRate: 4,
-      monthlyRent: '',
-      cashDownRatio: 0.2,
+      interestRate: 3.75,
+      monthlyRent: 3650,
+      cashDownRatio: 25,
       mortgagePeriods: 360,
+      depreciationRate: 50,
 
       rentalIncome: 0,
-      occupancyRate: 85,
-      vacancyRate: 0.15,
+      occupancyRate: 92,
       operatingExpensesRate: 15,
       operatingExpenses: '',
       
@@ -28,7 +28,11 @@ var RentalPassiveIncome = React.createClass({
       pretaxCashflow: 0,
       monthlyPmt: 0,
       operatingExpenses: 0,
-      taxBracket: 0.33,
+      taxBracket: 33,
+      hoaFees: 0,
+      propertyTaxRate: 1.25,
+      propertyTax: 0,
+      insuranceCost: 500,
     };
   },
   handlePurchasePriceChange: function(e){
@@ -41,16 +45,28 @@ var RentalPassiveIncome = React.createClass({
   handleMonthlyRentChange: function(e){
     this.setState({ monthlyRent: e.target.value });  
   },
+  handleChangeInput: function(e){
+    var stateObject = function() {
+      returnObj = {};
+      console.log();
+      returnObj[this.target.id] = this.target.value;
+         return returnObj;
+    }.bind(e)();
+
+    this.setState(stateObject);
+    this.handleCalc();
+  },
   handleCalc: function() {
     var purchasePrice = this.state.purchasePrice;
-    var loanAmount = purchasePrice * ( 1 - this.state.cashDownRatio );
+    var propertyTax = this.state.purchasePrice * this.state.propertyTaxRate/100 * -1;
+    var loanAmount = purchasePrice * ( 1 - this.state.cashDownRatio/100 );
     var cashDownAmount = (purchasePrice - loanAmount)* -1;
     var rate = this.state.interestRate / 100;
     var numberPmts = this.state.mortgagePeriods;
     var monthlyRent = this.state.monthlyRent;
     var rentalIncome = monthlyRent * 12;
     var vacancyLoss = rentalIncome * (1 - (this.state.occupancyRate/100)) * -1;
-    var operatingExpenses = rentalIncome * (this.state.operatingExpensesRate/100) * -1;
+    var operatingExpenses = (rentalIncome * (this.state.operatingExpensesRate/100) * -1) - this.state.hoaFees*12;
     var netOperatingIncome = rentalIncome + vacancyLoss + operatingExpenses;
 
     var details = amortize({
@@ -61,20 +77,26 @@ var RentalPassiveIncome = React.createClass({
     });
 
     var mortgageInterest = details.interest * -1;
-    var depreciation = this.state.purchasePrice / 27.5 * -1;
-    var taxableIncome = netOperatingIncome + mortgageInterest + depreciation;
+    var depreciation = (this.state.purchasePrice * this.state.depreciationRate/100) / 27.5 * -1;
+    var taxableIncome = netOperatingIncome + mortgageInterest + depreciation + propertyTax;
     var annualDebtService = (details.interest + details.principal) * -1;
-    var pretaxCashflow = netOperatingIncome + annualDebtService;
+    var pretaxCashflow = netOperatingIncome + annualDebtService + propertyTax - this.state.insuranceCost;
     var afterTaxCashFlow = 0;
+    var taxDue = 0;
     if (taxableIncome > 0){
-      afterTaxCashFlow = pretaxCashflow - ( taxableIncome * this.state.taxBracket);
+      taxDue = taxableIncome * this.state.taxBracket/100;
+      afterTaxCashFlow = pretaxCashflow - taxDue;
     }else{
       afterTaxCashFlow = pretaxCashflow;
     }
+    var taxSavings = (pretaxCashflow * this.state.taxBracket/100)  - (taxableIncome * this.state.taxBracket/100);
 
     this.setState({
+      propertyTax: propertyTax,
+      roi: afterTaxCashFlow / purchasePrice,
       rentalIncome: rentalIncome,
       vacancyLoss: vacancyLoss,
+      vacancyLossM: vacancyLoss/12,
       netOperatingIncome: netOperatingIncome,
       mortgageInterest: mortgageInterest,
       depreciation: depreciation,
@@ -87,10 +109,18 @@ var RentalPassiveIncome = React.createClass({
       monthlyPmt: -1 * details.payment,
       operatingExpenses: operatingExpenses,
       afterTaxCashFlow: afterTaxCashFlow,
+      afterTaxCashFlowM: afterTaxCashFlow /12,
       monthlyPmtInterest: details.interest / 12,
-      monthlyPmtPrincipal: details.principal / 12
+      monthlyPmtPrincipal: details.principal / 12,
+      taxSavings: taxSavings,
+      taxDue: taxDue,
+
     });
-    document.getElementById("cashflowStatement").scrollIntoView();
+    var scroll = ReactDOM.findDOMNode(this.refs.cashflowStatement);
+    if(scroll) scroll.scrollIntoView();
+  },
+  componentWillMount: function(){
+    this.handleCalc();
   },
   handleOccupancyRateChange: function(e){
     this.setState( { occupancyRate: (e.target.value)});
@@ -115,13 +145,13 @@ var RentalPassiveIncome = React.createClass({
                       <label htmlFor="purchasePrice" className="control-label">Purchase Price</label>
                       <div className="input-group">
                         <div className="input-group-addon">$</div>
-                        <input type="number" min="0" inputMode="numeric" pattern="[0-9]*" onChange={this.handlePurchasePriceChange} className="form-control" id="purchasePrice" placeholder="Purchase Price" value={this.state.purchasePrice} />
+                        <input type="number" min="0" inputMode="numeric" ref="purchasePriceInput" pattern="[0-9]*" onChange={this.handlePurchasePriceChange} className="form-control" id="purchasePrice" placeholder="Purchase Price" value={this.state.purchasePrice} />
                       </div>
                     </div>
                     <div className="form-group">
                       <label htmlFor="interestRate" className="control-label">Interest Rate</label>
                       <div className="input-group">
-                        <input type="number" min="0" inputMode="numeric" pattern="[0-9]*" onChange={this.handleInterestRateChange} className="form-control" id="interestRate" placeholder="Interest Rate" value={this.state.interestRate} />
+                        <input type="number" min="0" inputMode="numeric"ref="interestRateInput"  pattern="[0-9.]*" onChange={this.handleInterestRateChange} className="form-control" id="interestRate" placeholder="Interest Rate" value={this.state.interestRate} />
                         <div className="input-group-addon">%</div>
                       </div>
                     </div>
@@ -129,7 +159,7 @@ var RentalPassiveIncome = React.createClass({
                       <label htmlFor="monthlyRent" className="control-label">Monthly Rent</label>
                       <div className="input-group">
                         <div className="input-group-addon">$</div>
-                        <input type="number" min="0" inputMode="numeric" pattern="[0-9]*" onChange={this.handleMonthlyRentChange}  className="form-control" id="monthlyRent" placeholder="Monthly Rent" value={this.state.monthlyRent} />
+                        <input type="number" min="0" inputMode="numeric" ref="monthlyRentInput" pattern="[0-9]*" onChange={this.handleMonthlyRentChange}  className="form-control" id="monthlyRent" placeholder="Monthly Rent" value={this.state.monthlyRent} />
                       </div>
                     </div>
                     <button type="button" onClick={this.handleCalc} className="col-sm-offset-2 btn btn-primary">calculate!</button>
@@ -137,13 +167,72 @@ var RentalPassiveIncome = React.createClass({
                   </div>
                 </div>
               </div>
-              <div className="col-lg-12">{/* ancillary input */}
+              <div className="col-lg-12">
+                <div className="panel panel-default">{/* parameters */}
+                  <div className="panel-heading">
+                    <h4 className="panel-tittle">Advanced Parameters</h4>
+                  </div>
+                  <div className="panel-body">
+                    <form>
+                      <div className="form-group">
+                        <label htmlFor="occupancyRate" className="control-label">Occupancy Rate</label>
+                        <div className="input-group">
+                          <input type="number" min="0" inputMode="numeric" ref="occupancyRateInput" pattern="[0-9.]*"  onChange={this.handleChangeInput} className="form-control" id="occupancyRate" placeholder={this.state.occupancyRate} />
+                          <div className="input-group-addon">%</div>
+                        </div>
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="operatingExpensesRate" className="control-label">Operating Expenses Rate</label>
+                        <div className="input-group">
+                          <input type="number" min="0" inputMode="numeric" ref="operatingExpensesRateInput" pattern="[0-9.]*"  onChange={this.handleChangeInput} className="form-control" id="operatingExpensesRate" placeholder={this.state.operatingExpensesRate} />
+                          <div className="input-group-addon">%</div>
+                        </div>
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="operatingExpensesRate" className="control-label">HOA Fees</label>
+                        <div className="input-group">
+                          <input type="number" min="0" inputMode="numeric" ref="hoaFeesInput" pattern="[0-9.]*"  onChange={this.handleChangeInput} className="form-control" id="hoaFees" placeholder={this.state.hoaFees} />
+                          <div className="input-group-addon">%</div>
+                        </div>
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="depreciationRate" className="control-label">Depreciation Rate </label>
+                        (<small>how much of the purchase price qualifies for depreciation</small>)
+                        <div className="input-group">
+                          <input type="number" min="0" inputMode="numeric" ref="depreciationRateInput" pattern="[0-9.]*"  onChange={this.handleChangeInput} className="form-control" id="depreciationRate" placeholder={this.state.depreciationRate} />
+                          <div className="input-group-addon">%</div>
+                        </div>
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="cashDownRatio" className="control-label">Cashdown Ratio</label>
+                        <div className="input-group">
+                          <input type="number" min="0" inputMode="numeric" ref="cashDownRatioInput" pattern="[0-9.]*"  onChange={this.handleChangeInput} className="form-control" id="cashDownRatio" placeholder={this.state.cashDownRatio} />
+                          <div className="input-group-addon">%</div>
+                        </div>
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="taxBracket" className="control-label">Tax Bracket</label>
+                        <div className="input-group">
+                          <input type="number" min="0" inputMode="numeric" ref="taxBracketInput" pattern="[0-9.]*"  onChange={this.handleChangeInput} className="form-control" id="taxBracket" placeholder={this.state.taxBracket} />
+                          <div className="input-group-addon">%</div>
+                        </div>
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="insuranceCost" className="control-label">Insurance Cost</label>
+                        <div className="input-group">
+                          <input type="number" min="0" inputMode="numeric" ref="insuranceCostInput" pattern="[0-9.]*"  onChange={this.handleChangeInput} className="form-control" id="insuranceCost" placeholder={this.state.insuranceCost} />
+                          <div className="input-group-addon">%</div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
               </div>      
             </div>
           </div>
           <div className="col-xs-12 col-sm-6">
-            <div id="cashflowStatement" className="row">
-              <div className="col-lg-12">
+            <div ref="cashflowStatement" className="row">
+              <div className="col-lg-12">{ /* cashflow statement */}
                 <div className="panel panel-default">{/* cashflow */}
                   <div className="panel-heading">
                     <h4 className="panel-title">Cashflow Statement</h4>
@@ -152,60 +241,116 @@ var RentalPassiveIncome = React.createClass({
                     <table className="table table-hover">
                       <thead>
                         <tr>
-                          <th>Rental Income</th>
-                          <th>{numeral(this.state.rentalIncome).format('($0,0.00)')}</th>
+                          <th></th>
+                          <th>yearly</th>
+                          <th>monthly</th>
                         </tr>
                       </thead>
                       <tbody>
+
+                        <tr>
+                          <td>Rental Income</td>
+                          <td>{numeral(this.state.rentalIncome).format('($0,0.00)')}</td>
+                          <td>{numeral(this.state.rentalIncome/12).format('($0,0.00)')}</td>
+                        </tr>
                         <tr>
                           <td>Vacancy Loss @ {numeral((100-this.state.occupancyRate)/100).format('0%')} </td>
                           <td>{numeral(this.state.vacancyLoss).format('($0,0.00)')}</td>
+                          <td>{numeral(this.state.vacancyLossM).format('($0,0.00)')}</td>
                         </tr>
                         <tr>
-                          <td>Operating Expenses</td>
+                          <td>Operating Expenses @ {numeral((this.state.operatingExpensesRate)/100).format('0%')}</td>
                           <td>{numeral(this.state.operatingExpenses).format('($0,0.00)')}</td>
+                          <td>{numeral((this.state.operatingExpenses/12)).format('($0,0.00)')}</td>
                         </tr>
                         <tr>
                           <td>Net Operating Income</td>
                           <td>{numeral(this.state.netOperatingIncome).format('($0,0.00)')}</td>
+                          <td>{numeral(this.state.netOperatingIncome/12).format('($0,0.00)')}</td>
                         </tr>
+                        <tr>
+                          <td>Debt Service (mortgage payment)</td>
+                          <td>{numeral(this.state.annualDebtService).format('($0,0.00)')}</td>
+                          <td>{numeral((this.state.annualDebtService/12)).format('($0,0.00)')}</td>
+                        </tr>
+                        <tr>
+                          <td>Property Tax @ { numeral(this.state.propertyTaxRate/100).format('%0.00') } of purchase price</td>
+                          <td>{numeral(this.state.propertyTax).format('($0,0.00)')}</td>
+                          <td>{numeral((this.state.propertyTax/12)).format('($0,0.00)')}</td>
+                        </tr>
+                        <tr>
+                          <td>Insurance</td>
+                          <td>{numeral(-this.state.insuranceCost).format('($0,0.00)')}</td>
+                          <td>{numeral((-this.state.insuranceCost/12)).format('($0,0.00)')}</td>
+                        </tr>
+                        <tr>
+                          <td><strong>Pretax Cashflow</strong></td>
+                          <td><strong>{numeral(this.state.pretaxCashflow).format('($0,0.00)')}</strong></td>
+                          <td><strong>{numeral((this.state.pretaxCashflow/12)).format('($0,0.00)')}</strong></td>
+                        </tr>
+
+                        <tr><td></td><td></td><td></td></tr>
                         <tr>
                           <td>Mortgage Interest</td>
                           <td>{numeral(this.state.mortgageInterest).format('($0,0.00)')}</td>
+                          <td></td>
                         </tr>
                         <tr>
-                          <td>Depreciation</td>
+                          <td>Depreciation @ {numeral((this.state.depreciationRate)/100).format('0%')} of property</td>
                           <td>{numeral(this.state.depreciation).format('($0,0.00)')}</td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td>Property Tax @ { numeral(this.state.propertyTaxRate/100).format('%0.00') } of purchase price</td>
+                          <td>{numeral(this.state.propertyTax).format('($0,0.00)')}</td>
+                          <td></td>
                         </tr>
                         <tr>
                           <td>Taxable Income</td>
                           <td>{numeral(this.state.taxableIncome).format('($0,0.00)')}</td>
-                        </tr>
-                        <tr>
-                          <td></td>
                           <td></td>
                         </tr>
                         <tr>
-                          <td>Net Operating Income</td>
-                          <td>{numeral(this.state.netOperatingIncome).format('($0,0.00)')}</td>
+                          <td><strong>Tax Due @ {numeral(this.state.taxBracket/100).format('0%')} of income</strong></td>
+                          <td><strong>{numeral(this.state.taxDue).format('($0,0.00)')}</strong></td>
+                          <td></td>
                         </tr>
                         <tr>
-                          <td>Annual Debt Service (principal and interest)</td>
-                          <td>{numeral(this.state.annualDebtService).format('($0,0.00)')}</td>
+                          <td></td><td></td><td></td>
                         </tr>
                         <tr>
-                          <td>Pretax Cashflow</td>
-                          <td>{numeral(this.state.pretaxCashflow).format('($0,0.00)')}</td>
-                        </tr>
-                        {/*<tr>
-                          <td>Tax Savings @ {numeral(this.state.taxBracket).format('0%')}</td>
-                          <td>{numeral(this.state.taxSavings).format('($0,0.00)')}</td>
-                        </tr>*/}
-                        <tr>
-                          <td><strong>After Tax Cashflow @ {numeral(this.state.taxBracket).format('%')}</strong></td>
+                          <td><strong>After Tax Cashflow</strong></td>
                           <td><strong>{numeral(this.state.afterTaxCashFlow).format('($0,0.00)')}</strong></td>
+                          <td><strong>{numeral((this.state.afterTaxCashFlowM)).format('($0,0.00)')}</strong></td>
                         </tr>
 
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-12">{/* ROI */}
+                <div className="panel panel-default">
+                  <div className="panel-heading">
+                    <h4 className="panel-title"></h4>
+                  </div>
+                  <div className="panel-body">
+                    <table className="table table-hover">
+                      <thead>
+                        <tr>
+                          <th></th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>principal</td>
+                          <td>{ numeral(-this.state.cashDownAmount).format('$(0,0.00)') } </td>
+                        </tr>
+                        <tr>
+                          <td>Annualized Returns</td>
+                          <td>{ numeral(this.state.roi).format('(0.00%)') }</td>
+                        </tr>
                       </tbody>
                     </table>
                   </div>

@@ -19,9 +19,8 @@ var RentalPassiveIncome = React.createClass({
       depreciationRate: 50,
 
       rentalIncome: 0,
-      occupancyRate: 92,
-      operatingExpensesRate: 15,
-      operatingExpenses: '',
+      occupancyRate: 100,
+      operatingExpensesRate: 5,
       
       rentalIncome: 0,
       netOperatingIncome: 0,
@@ -224,12 +223,12 @@ var RentalPassiveIncome = React.createClass({
                           <td>{numeral(this.state.rentalIncome/12).format('($0,0.00)')}</td>
                         </tr>
                         <tr>
-                          <td>Vacancy Loss @ {numeral((100-this.state.occupancyRate)/100).format('0%')} </td>
+                          <td>Vacancy Loss @ {numeral(this.state.occupancyRate/100).format('0%')} occupancy rate </td>
                           <td>{numeral(this.state.vacancyLoss).format('($0,0.00)')}</td>
                           <td>{numeral(this.state.vacancyLossM).format('($0,0.00)')}</td>
                         </tr>
                         <tr>
-                          <td>Operating Expenses @ {numeral((this.state.operatingExpensesRate)/100).format('0%')}</td>
+                          <td>Operating Expenses @ {numeral((this.state.operatingExpensesRate)/100).format('0%')} of rent + HOA</td>
                           <td>{numeral(this.state.operatingExpenses).format('($0,0.00)')}</td>
                           <td>{numeral((this.state.operatingExpenses/12)).format('($0,0.00)')}</td>
                         </tr>

@@ -153,7 +153,7 @@ var Affordability = React.createClass({
     }
     var debtRationReqMet = '';
     if(this.state.debtRatio != ''){
-      if(this.state.debtRatio > 43){
+      if(this.state.debtRatio > 0.435){
         debtRationReqMet = <div className="alert alert-danger alert-dismissible" role="alert">You are not meeting the debt ratio requirement.</div>;
       }else{
         debtRationReqMet = <div className="alert alert-success alert-dismissible" role="alert">You meet the debt ratio requirement!</div>;
@@ -176,7 +176,7 @@ var Affordability = React.createClass({
                       <label htmlFor="purchasePrice" className="control-label">Purchase Price</label>
                       <div className="input-group">
                         <div className="input-group-addon">$</div>
-                        <input type="number" min="0" inputMode="numeric" pattern="[0-9]*" onChange={this.purchasePriceChange} className="form-control" id="purchasePrice" placeholder="500,000" value={this.state.purchasePrice} />
+                        <input type="number" min="0" inputMode="numeric" pattern="[0-9]*" onChange={this.purchasePriceChange} className="form-control" id="purchasePrice" placeholder={this.state.purchasePrice} />
                       </div>
                     </div>
                     
@@ -185,7 +185,7 @@ var Affordability = React.createClass({
                       <label htmlFor="rehabAmount" className="control-label">Rehab Amount</label>
                       <div className="input-group">
                         <div className="input-group-addon">$</div>
-                        <input type="number" min="0" inputMode="numeric" pattern="[0-9]*" onChange={this.rehabAmountChange} className="form-control" id="rehabAmount" placeholder="30,000" value={this.state.rehabAmount} />
+                        <input type="number" min="0" inputMode="numeric" pattern="[0-9]*" onChange={this.rehabAmountChange} className="form-control" id="rehabAmount" placeholder={this.state.rehabAmount} />
                       </div>
                     </div>
                   <hr/>
@@ -194,7 +194,7 @@ var Affordability = React.createClass({
                     <div className="form-group">
                       <label htmlFor="mortgageLength" className="control-label">Mortgage Length</label>
                       <div className="input-group">
-                        <input type="number" min="0" inputMode="numeric" pattern="[0-9]*" onChange={this.mortgageLengthChange} className="form-control" id="mortgageLength" placeholder="30" value={this.state.mortgageLength} />
+                        <input type="number" min="0" inputMode="numeric" pattern="[0-9]*" onChange={this.mortgageLengthChange} className="form-control" id="mortgageLength" placeholder={this.state.mortgageLength} />
                         <div className="input-group-addon"> years</div>
                       </div>
                     </div>
@@ -202,7 +202,7 @@ var Affordability = React.createClass({
                     <div className="form-group">
                       <label htmlFor="cashDownRate" className="control-label">Cash Down Rate</label>
                       <div className="input-group">
-                        <input type="number" min="0" inputMode="numeric" pattern="[0-9]*" onChange={this.cashDownRateChange} className="form-control" id="cashDownRate" placeholder="25" value={this.state.cashDownRate} />
+                        <input type="number" min="0" inputMode="numeric" pattern="[0-9]*" onChange={this.cashDownRateChange} className="form-control" id="cashDownRate" placeholder={this.state.cashDownRate} />
                         <div className="input-group-addon">%</div>
 
                       </div>
@@ -211,7 +211,7 @@ var Affordability = React.createClass({
                     <div className="form-group">
                       <label htmlFor="interestRate" className="control-label">Interest Rate</label>
                       <div className="input-group">
-                        <input type="number" inputMode="numeric"  onChange={this.interestRateChange} className="form-control" id="interestRate" placeholder="4" value={this.state.interestRate} />
+                        <input type="number" inputMode="numeric"  onChange={this.interestRateChange} className="form-control" id="interestRate" placeholder={this.state.interestRate} />
                         <div className="input-group-addon">%</div>
                       </div>
                     </div>
@@ -220,7 +220,7 @@ var Affordability = React.createClass({
                       <label htmlFor="appraisalPrice" className="control-label">Appraisal Price</label>
                       <div className="input-group">
                         <div className="input-group-addon">$</div>
-                        <input type="number" min="0" inputMode="numeric" pattern="[0-9]*" onChange={this.appraisalPriceChange} className="form-control" id="appraisalPrice" placeholder="500,000" value={this.state.appraisalPrice} />
+                        <input type="number" min="0" inputMode="numeric" pattern="[0-9]*" onChange={this.appraisalPriceChange} className="form-control" id="appraisalPrice" placeholder={this.state.purchasePrice} />
                       </div>
                     </div>
                    
@@ -231,7 +231,7 @@ var Affordability = React.createClass({
                       <label htmlFor="monthlyPretaxIncome" className="control-label">Monthly Income Before Taxes</label>
                       <div className="input-group">
                         <div className="input-group-addon">$</div>
-                        <input type="number" min="0" inputMode="numeric" pattern="[0-9]*" onChange={this.monthlyPretaxIncomeChange} className="form-control" id="monthlyPretaxIncome" placeholder="12,000" value={this.state.monthlyPretaxIncome} />
+                        <input type="number" inputMode="numeric" pattern="[0-9]*" onChange={this.monthlyPretaxIncomeChange} className="form-control" id="monthlyPretaxIncome" placeholder={this.state.monthlyPretaxIncome} />
                       </div>
                     </div>
                   {/* form group monthlyDebtPayments */}
@@ -239,7 +239,7 @@ var Affordability = React.createClass({
                       <label htmlFor="monthlyDebtPayments" className="control-label">Monthly Debt Payments</label>
                       <div className="input-group">
                         <div className="input-group-addon">$</div>
-                        <input type="number" min="0" inputMode="numeric" pattern="[0-9]*" onChange={this.monthlyDebtPaymentsChange} className="form-control" id="monthlyDebtPayments" placeholder="2,000" value={this.state.monthlyDebtPayments} />
+                        <input type="number" min="0" inputMode="numeric" pattern="[0-9]*" onChange={this.monthlyDebtPaymentsChange} className="form-control" id="monthlyDebtPayments" placeholder={this.state.monthlyDebtPayments} />
                       </div>
                     </div>
                   {/* form group cashInBank */}
@@ -247,7 +247,7 @@ var Affordability = React.createClass({
                       <label htmlFor="cashInBank" className="control-label">Cash In Bank</label>
                       <div className="input-group">
                         <div className="input-group-addon">$</div>
-                        <input type="number" min="0" inputMode="numeric" pattern="[0-9]*" onChange={this.cashInBankChange} className="form-control" id="cashInBank" value={this.state.cashInBank} />
+                        <input type="number" min="0" inputMode="numeric" pattern="[0-9]*" onChange={this.cashInBankChange} className="form-control" id="cashInBank" placeholder={this.state.cashInBank} />
                       </div>
                     </div>
                   <button type="button" onClick={this.handleCalculate} className="pull-right btn btn-primary">Calculate</button>

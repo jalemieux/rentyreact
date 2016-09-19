@@ -5,7 +5,7 @@ var CashflowStatementParameters = React.createClass({
   render: function() {
     return (
 
-          <form>
+          <div>
             <div className="form-group">
               <label htmlFor="occupancyRate" className="control-label">Occupancy Rate</label>
               <div className="input-group">
@@ -21,10 +21,11 @@ var CashflowStatementParameters = React.createClass({
               </div>
             </div>
             <div className="form-group">
-              <label htmlFor="operatingExpensesRate" className="control-label">HOA Fees</label>
+              <label htmlFor="operatingExpensesRate" className="control-label">Yearly HOA Fees</label>
               <div className="input-group">
+                <div className="input-group-addon">$</div>
                 <input type="number" min="0" inputMode="numeric" ref="hoaFeesInput" pattern="[0-9.]*"  onChange={this.props.handleChangeInput} className="form-control" id="hoaFees" placeholder={this.props.hoaFees} />
-                <div className="input-group-addon">%</div>
+                
               </div>
             </div>
             <div className="form-group">
@@ -50,13 +51,13 @@ var CashflowStatementParameters = React.createClass({
               </div>
             </div>
             <div className="form-group">
-              <label htmlFor="insuranceCost" className="control-label">Insurance Cost</label>
+              <label htmlFor="insuranceCost" className="control-label">Yearly Insurance Cost</label>
               <div className="input-group">
+                <div className="input-group-addon">$</div>
                 <input type="number" min="0" inputMode="numeric" ref="insuranceCostInput" pattern="[0-9.]*"  onChange={this.props.handleChangeInput} className="form-control" id="insuranceCost" placeholder={this.props.insuranceCost} />
-                <div className="input-group-addon">%</div>
               </div>
             </div>
-          </form>
+          </div>
     )
   }
 });

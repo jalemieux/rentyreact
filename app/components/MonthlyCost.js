@@ -2,12 +2,11 @@
 
 import React, { PropTypes } from 'react'
 import numeral  from 'numeral'
-import { styles } from '../styles/MonthlyCost'
+import { styles } from '../styles/'
 
 
 const MonthlyCost = ( props ) => {
 	let { monthly } = props
-	console.log("in monthly cost form : ", monthly)
 	return(
   	<div className="panel panel-default">{/* Monthly Cost */}
 	  <div className="panel-heading">

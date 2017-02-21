@@ -1,4 +1,13 @@
-var styles = {
+export const styles = {
+  visible: {
+    display: 'block'
+  },
+  hidden: {
+    display: 'none'
+  },
+  borderTop: {
+    borderTop: 'solid'
+  },
   padding10: {
     padding: '10px'
   },
@@ -196,4 +205,3 @@ var styles = {
 // }
 
 
-module.exports = styles;

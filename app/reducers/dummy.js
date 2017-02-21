@@ -1,10 +1,8 @@
 //dummy.j
-const dummy = (state = [], action) => {
-	console.log("dummy reducer, action: ", action)
-	console.log("dummy reducer, state: ", state)
+export const dummy = (state = [], action) => {
+	//console.log("dummy reducer, action, state: ", action, state)
 	return state
 }
 
 
 
-export default dummy

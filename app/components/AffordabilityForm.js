@@ -4,7 +4,7 @@ import { Field, reduxForm } from 'redux-form';
 
 import numeral  from 'numeral'
 
-import { styles } from '../styles/AffordabilityForm'
+import { styles } from '../styles/'
 
 const formGroupClasses = ( error ) => {
   if (error) {
@@ -44,45 +44,60 @@ const percentAddonDecorator = ( inputField ) => (
   </div>
 )
 
+/**
+form values:
+------------
+purchasePrice
+rehabAmount
+mortgageLength
+cashDownRate
+interestRate
+appraisalPrice
+monthlyPretaxIncome
+monthlyDebt
+cashInBank
+**/
+
 const AffordabilityForm = (props) => {
     const { error, handleSubmit, pristine, submitting, onSubmit } = props
     return (
-      
-        <div className="panel panel-default">{/* Monthly Cost */}
+        <div className="panel panel-primary">{/* Monthly Cost */}
           <div className="panel-heading">
-            <h4 className="panel-title">N3mbers</h4>
+            <h2 className="panel-title">Property Details</h2>
           </div>
           <div className="panel-body">
-            <h2><small>Property Details</small></h2>
             <form onSubmit={handleSubmit(onSubmit)}>
-              <Field component={renderFormGroupWAddon} name="purchasePrice" label="Purchase Price" type="numeric" placeholder="530000" 
+              <Field component={renderFormGroupWAddon} name="purchasePrice" label="Purchase Price" type="numeric" 
                 addonDecorator={dollarAddonDecorator} />
 
-              <Field component={renderFormGroupWAddon} name="rehabAmount" label="Rehab Amount" type="numeric" placeholder="0" 
+              <Field component={renderFormGroupWAddon} name="rehabAmount" label="Rehab Amount" type="numeric" 
                 addonDecorator={dollarAddonDecorator} />
             <hr/>
-            <h2><small>Mortgage Details</small></h2>
-              <Field component={renderFormGroupWAddon} name="mortgageLength" label="Mortage Length (Years)" type="numeric" placeholder="30" 
+            <h3><small>Mortgage Details</small></h3>
+              <Field component={renderFormGroupWAddon} name="mortgageLength" label="Mortage Length (Years)" type="numeric"
                 addonDecorator={nullDecorator} />
 
-              <Field component={renderFormGroupWAddon} name="cashDownRate" label="Cash Down Rate" type="numeric" placeholder="25" 
+              <Field component={renderFormGroupWAddon} name="cashDownRate" label="Cash Down Rate" type="numeric" 
                 addonDecorator={percentAddonDecorator} />
 
-              <Field component={renderFormGroupWAddon} name="interestRate" label="Interest Rate" type="numeric" placeholder="4" 
+              <Field component={renderFormGroupWAddon} name="interestRate" label="Interest Rate" type="numeric" 
                 addonDecorator={percentAddonDecorator} />
 
-              <Field component={renderFormGroupWAddon} name="appraisalPrice" label="Bank Appraisal" type="numeric" placeholder="530000" 
+              <Field component={renderFormGroupWAddon} name="appraisalPrice" label="Bank Appraisal" type="numeric" 
                 addonDecorator={dollarAddonDecorator} />
 
             <hr />
-            <h2><small>Current Income, Debts, and Assets</small></h2>
+            <h3><small>Current Income, Debts, and Assets</small></h3>
 
-              <Field component={renderFormGroupWAddon} name="monthlyPretaxIncome" label="Monthly Pretax Income" type="numeric" placeholder="8000" 
-                addonDecorator={percentAddonDecorator} />
-              <Field component={renderFormGroupWAddon} name="monthlyDebtPayments" label="Monthly Debt" type="numeric" placeholder="1200" 
-                addonDecorator={percentAddonDecorator} />
-              <Field component={renderFormGroupWAddon} name="cashInBank" label="Cash" type="numeric" placeholder="20000" 
-                addonDecorator={percentAddonDecorator} />
+              <Field component={renderFormGroupWAddon} name="monthlyPretaxIncome" label="Monthly Pretax Income" type="numeric" 
+                addonDecorator={dollarAddonDecorator} />
+              
+              <Field component={renderFormGroupWAddon} name="monthlyDebtPayment" label="Monthly Debt" type="numeric" 
+                addonDecorator={dollarAddonDecorator} /> 
+           
+              <Field component={renderFormGroupWAddon} name="cashInBank" label="Cash" type="numeric" 
+                addonDecorator={dollarAddonDecorator} />
+           
            { error && <div className="alert alert-danger" role="alert">{error}</div>}
 
               <button type="submit" disabled={submitting} className="pull-right btn btn-primary">submit</button>

@@ -18,7 +18,7 @@ var Main = React.createClass({
           {this.props.children}
           <footer>
             <hr/>
-            <p className="text-center">&copy; 2016 renty, Inc.</p>
+            <p className="text-center">&copy; 2017 rentd.me, Inc.</p>
           </footer>
         </div>
       </div>

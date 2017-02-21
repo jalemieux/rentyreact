@@ -2,19 +2,24 @@
 import { combineReducers } from 'redux'
 import { reducer as reduxFormReducer } from 'redux-form'
 
-import monthly from './monthly'
-import dummy from './dummy'
-//import affordability from './affordability'
+import { dummy } from './dummy'
+import { affordability } from './affordability'
+import { rentalIncome } from './rentalIncome'
 
 
+// const reducers = combineReducers({
+//   affordability,	
+//   form: reduxFormReducer,
+//   dummy,
+// })
 
-const reducer = combineReducers({
-  monthly,
-  form: reduxFormReducer,
-  //dummy,
-})
+const reducers = {
+	affordability,
+	form: reduxFormReducer,
+	rentalIncome, 
+}
 
-export default reducer
+export default reducers
 
 
 

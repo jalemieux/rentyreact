@@ -10,9 +10,7 @@ import { styles } from '../styles/'
 import { renderFormGroupWAddon, dollarAddonDecorator, percentAddonDecorator, nullDecorator } from './Helpers'
 
 const RentalIncomeForm = (props) => {
-    const { error, handleSubmit, pristine, submitting, onSubmit, showAdvancedParameters, handleToggleAdvancedParameters } = props
-    console.log("showAdvancedParameters: ", showAdvancedParameters)
-    
+    const { error, handleSubmit, pristine, submitting, onSubmit, showAdvancedParameters, handleToggleAdvancedParameters } = props    
     return (
         <div className="panel panel-primary">{/* Monthly Cost */}
           <div className="panel-heading">

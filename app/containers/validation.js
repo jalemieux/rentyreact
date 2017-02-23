@@ -1,5 +1,7 @@
 //validation.js
 
+import { SubmissionError } from 'redux-form'
+
 export const validate = ( fieldValue, fieldName, validation, error ) => {
   var errorArr = {}
   if(!validation(fieldValue)){

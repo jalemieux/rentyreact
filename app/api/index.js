@@ -28,9 +28,10 @@ cashInBank
     var cashDownRate = parseFloat(input.cashDownRate / 100)
     var monthlyDebtPayment = parseFloat(input.monthlyDebtPayment * -1)
     var purchasePrice = parseFloat(input.purchasePrice * -1)
-    var propTaxRate = 0.0125;
-    var monthlyInsurance = 800/12 * -1;
-    var incomeTaxBracket = 0.33;
+    var propTaxRate = parseFloat(input.propTaxRate) /100
+    var insurance = parseFloat(input.insurance) *-1
+    var monthlyInsurance = insurance / 12
+    var incomeTaxBracket = parseFloat(input.incomeTaxBracket) /100
     var cashInBank = parseFloat(input.cashInBank)
 
     var monthlyInterest = oneMonthDetails.interest * -1;

@@ -29,8 +29,8 @@ var NavbarTools = React.createClass({
           </div>
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul className="nav navbar-nav">
-              <li><Link to="/cashflow" activeClassName="active">cashflow</Link></li>
-              <li><Link to="/affordability"  activeClassName="active">affordability</Link></li>
+              <li><Link to="/cashflow" activeClassName="active">Rental Income Cashflow</Link></li>
+              <li><Link to="/affordability"  activeClassName="active">Property Affordability</Link></li>
             </ul>
           </div>
         </div>

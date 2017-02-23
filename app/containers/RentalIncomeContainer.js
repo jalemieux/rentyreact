@@ -29,14 +29,16 @@ const rentalIncomeFormInitialValues = {
 
 const RentalIncomeContainer = ( { rentalIncome, showAdvancedParameters, handleToggleAdvancedParameters, onSubmit } ) => (
 		<div>
+        
         <div className="col-xs-12 col-sm-6 col-md-4">
+
           <RentalIncomeForm
             initialValues={rentalIncomeFormInitialValues} 
             showAdvancedParameters={showAdvancedParameters}
             handleToggleAdvancedParameters={handleToggleAdvancedParameters}
             onSubmit={onSubmit} />
         </div>
-        <div className="col-xs-12 col-sm-6 col-md-4">
+        <div className="col-xs-12 col-sm-6 col-md-8">
   		    <div id="affordabilityMatrix" className="row">
             <div className="col-lg-12">
               <RentalIncomeCashflow rentalIncome={rentalIncome} />

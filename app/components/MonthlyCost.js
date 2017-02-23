@@ -5,8 +5,8 @@ import numeral  from 'numeral'
 import { styles } from '../styles/'
 
 
-const MonthlyCost = ( props ) => {
-	let { monthly } = props
+const MonthlyCost = ( { affordability } ) => {
+	const { data, pristine } = affordability
 	return(
   	<div className="panel panel-default">{/* Monthly Cost */}
 	  <div className="panel-heading">
@@ -17,15 +17,15 @@ const MonthlyCost = ( props ) => {
 	      <tbody>
 	        <tr>
 	          <td>Monthly Insurance</td>
-	          <td>{numeral(monthly.monthlyInterest).format('($0,0.00)')}</td>
+	          <td>{numeral(data.monthlyInterest).format('($0,0.00)')}</td>
 	        </tr>
 	        <tr>
 	          <td>Monthly Principal</td>
-	          <td>{numeral(monthly.monthlyPrincipal).format('($0,0.00)')}</td>
+	          <td>{numeral(data.monthlyPrincipal).format('($0,0.00)')}</td>
 	        </tr>
 	        <tr style={styles.borderTop}>
 	          <td><strong>Monthly Mortgage Payment</strong></td>
-	          <td><strong>{numeral(monthly.monthlyPayment).format('($0,0.00)')}</strong></td>
+	          <td><strong>{numeral(data.monthlyPayment).format('($0,0.00)')}</strong></td>
 	        </tr>
 	      </tbody>
 	    </table>
@@ -33,23 +33,23 @@ const MonthlyCost = ( props ) => {
 	      <tbody>
 	        <tr>
 	          <td>Monthly Interests</td>
-	          <td>{numeral(monthly.monthlyInterest).format('($0,0.00)')}</td>
+	          <td>{numeral(data.monthlyInterest).format('($0,0.00)')}</td>
 	        </tr>
 	        <tr>
 	          <td>Monthly Taxes</td>
-	          <td>{numeral(monthly.monthlyPropTax).format('($0,0.00)')}</td>
+	          <td>{numeral(data.monthlyPropTax).format('($0,0.00)')}</td>
 	        </tr>
 	        <tr>
 	          <td>Monthly Insurance</td>
-	          <td>{numeral(monthly.monthlyInsurance).format('($0,0.00)')}</td>
+	          <td>{numeral(data.monthlyInsurance).format('($0,0.00)')}</td>
 	        </tr>
 	        <tr>
 	          <td>Monthly Principal</td>
-	          <td>{numeral(monthly.monthlyPrincipal).format('($0,0.00)')}</td>
+	          <td>{numeral(data.monthlyPrincipal).format('($0,0.00)')}</td>
 	        </tr>
 	        <tr style={styles.borderTop}>
 	          <td><strong>Monthly Pretax Total</strong></td>
-	          <td><strong>{numeral(monthly.monthlyPIIT).format('($0,0.00)')}</strong></td>
+	          <td><strong>{numeral(data.monthlyPIIT).format('($0,0.00)')}</strong></td>
 	        </tr>
 	      </tbody>
 	    </table>
@@ -57,17 +57,17 @@ const MonthlyCost = ( props ) => {
 	      <thead>
 	        <tr>
 	          <th>Monthly Pretax Cost</th>
-	          <th>{numeral(monthly.monthlyPIIT).format('($0,0.00)')}</th>
+	          <th>{numeral(data.monthlyPIIT).format('($0,0.00)')}</th>
 	        </tr>
 	      </thead>
 	      <tbody>
 	        <tr>
 	          <td>Tax Savings</td>
-	          <td>{numeral(monthly.monthlyTaxSavings).format('($0,0.00)')}</td>
+	          <td>{numeral(data.monthlyTaxSavings).format('($0,0.00)')}</td>
 	        </tr>
 	        <tr style={styles.borderTop}>
 	          <td>Total</td>
-	          <td>{numeral(monthly.monthlyCostAfterTax).format('($0,0.00)')}</td>
+	          <td>{numeral(data.monthlyCostAfterTax).format('($0,0.00)')}</td>
 	        </tr>
 	      </tbody>
 	    </table>
@@ -77,15 +77,18 @@ const MonthlyCost = ( props ) => {
 
 
 MonthlyCost.propTypes = {
-	monthly: PropTypes.shape({
-	  	monthlyInterest: PropTypes.number.isRequired,
-	  	monthlyPropTax: PropTypes.number.isRequired,
-	  	monthlyPrincipal: PropTypes.number.isRequired,
-	  	monthlyInsurance: PropTypes.number.isRequired,
-	  	monthlyPIIT: PropTypes.number.isRequired,
-	  	montlhyTaxSavings: PropTypes.number.isRequired,
-	  	monthlyCostAfterTax: PropTypes.number.isRequired,
-	  	monthlyPayment: PropTypes.number.isRequired
+	affordability: PropTypes.shape({
+		data: PropTypes.shape({
+		  	monthlyInterest: PropTypes.isRequired,
+		  	monthlyPropTax: PropTypes.isRequired,
+		  	monthlyPrincipal: PropTypes.isRequired,
+		  	monthlyInsurance: PropTypes.isRequired,
+		  	monthlyPIIT: PropTypes.isRequired,
+		  	montlhyTaxSavings: PropTypes.isRequired,
+		  	monthlyCostAfterTax: PropTypes.isRequired,
+		  	monthlyPayment: PropTypes.isRequired
+		}),
+		pristine: PropTypes.isRequired
 	}).isRequired
 }
 

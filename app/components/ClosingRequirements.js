@@ -11,8 +11,8 @@ const requirementMet = ( condition, success, failure ) => {
 	return (<div className="alert alert-danger alert-dismissible" role="alert">{failure}</div>)
 }
 
-const ClosingRequirements = ( props ) => {
-	let { closingRequirements } = props
+const ClosingRequirements = ( { affordability } ) => {
+	const { pristine, data } = affordability
 	return(
   	<div className="panel panel-default">{/* Closing Requirements */}
       <div className="panel-heading">
@@ -23,78 +23,78 @@ const ClosingRequirements = ( props ) => {
           <thead>
               <tr>
                 <th>Cash Before Closing</th>
-                <th>{numeral(closingRequirements.cashInBank).format('($0,0.00)')}</th>
+                <th>{numeral(data.cashInBank).format('($0,0.00)')}</th>
               </tr>
           </thead>
           <tbody>
             <tr>
               <td>Cash Down</td>
-              <td>{numeral(closingRequirements.cashDownCost).format('($0,0.00)')}</td>
+              <td>{numeral(data.cashDownCost).format('($0,0.00)')}</td>
             </tr>
             <tr>
               <td>Rehab Cost</td>
-              <td>{numeral(closingRequirements.rehabAmount).format('($0,0.00)')}</td>
+              <td>{numeral(data.rehabAmount).format('($0,0.00)')}</td>
             </tr>
             <tr style={styles.borderTop}>
               <td>Cash Before Reserve</td>
-              <td>{numeral(closingRequirements.cashBeforeReserve).format('($0,0.00)')}</td>
+              <td>{numeral(data.cashBeforeReserve).format('($0,0.00)')}</td>
             </tr>
           </tbody>
         </table>
-        {requirementMet( 
-        	() => closingRequirements.cashBeforeReserve  >= 0,
+        { !pristine && requirementMet( 
+        	() => data.cashBeforeReserve  >= 0,
         	"You meet the cash requirement",
         	"You are short on cash" )}
         <table className="table table-hover">
           <thead>
               <tr>
                 <th>Cash Before Reserve</th>
-                <th>{numeral(closingRequirements.cashBeforeReserve).format('($0,0.00)')}</th>
+                <th>{numeral(data.cashBeforeReserve).format('($0,0.00)')}</th>
               </tr>
           </thead>
           <tbody>
             <tr>
               <td>Reserve Requirements</td>
-              <td>{numeral(closingRequirements.reserveRequirementCost).format('($0,0.00)')}</td>
+              <td>{numeral(data.reserveRequirementCost).format('($0,0.00)')}</td>
             </tr>
             <tr style={styles.borderTop}>
               <td>Balance After Reserve</td>
-              <td>{numeral(closingRequirements.cashAfterReserve).format('($0,0.00)')}</td>
+              <td>{numeral(data.cashAfterReserve).format('($0,0.00)')}</td>
             </tr>
           </tbody>
         </table>
-        {requirementMet(
-        	() => closingRequirements.cashAfterReserve  >= 0,
+        {!pristine && requirementMet(
+        	() => data.cashAfterReserve  >= 0,
         	"You meet the reserve requirements",
         	"You do not meet the reserve requirements")}
         <table className="table table-hover">
           <thead>
               <tr>
                 <th>Monthly Income</th>
-                <th>{numeral(closingRequirements.monthlyPretaxIncome).format('($0,0.00)')}</th>
+                <th>{numeral(data.monthlyPretaxIncome).format('($0,0.00)')}</th>
               </tr>
           </thead>
           <tbody>
             <tr>
               <td>Monthly Debts</td>
-              <td>{numeral(closingRequirements.monthlyDebtPayment).format('($0,0.00)')}</td>
+              <td>{numeral(data.monthlyDebtPayment).format('($0,0.00)')}</td>
             </tr>
             <tr>
               <td>Monthly PIIT</td>
-              <td>{numeral(closingRequirements.monthlyPIIT).format('($0,0.00)')}</td>
+              <td>{numeral(data.monthlyPIIT).format('($0,0.00)')}</td>
             </tr>
             <tr style={styles.borderTop}>
               <td>Monthly total debt</td>
-              <td>{numeral(closingRequirements.monthlyDebtsCost).format('($0,0.00)')}</td>
+              <td>{numeral(data.monthlyDebtsCost).format('($0,0.00)')}</td>
             </tr>
             <tr style={styles.borderTop}>
               <td>Debt Ratio</td>
-              <td>{numeral(closingRequirements.debtRatio).format('(%0.0)')}</td>
+              <td>{numeral(data.debtRatio).format('(%0.0)')}</td>
             </tr>
           </tbody>
         </table>
-        {requirementMet(
-        	() => closingRequirements.debtRatio < closingRequirements.stdDebtRatio,
+        {!pristine && requirementMet(
+        	() => data.debtRatio < data.stdDebtRatio,
         	`You meet the debt ratio requirement.`,
         	"You do not meet the debt ratio.")}
       </div>
@@ -103,7 +103,8 @@ const ClosingRequirements = ( props ) => {
 
 
 ClosingRequirements.propTypes = {
-	closingRequirements: PropTypes.shape({
+	affordability: PropTypes.shape({
+    data: PropTypes.shape({
 	  	cashInBank: PropTypes.isRequired,
 	  	cashDownCost: PropTypes.isRequired,
 	  	rehabAmount: PropTypes.isRequired,
@@ -115,7 +116,9 @@ ClosingRequirements.propTypes = {
 	  	monthlyPIIT: PropTypes.isRequired,
 	  	debtRatio: PropTypes.isRequired,
 	  	stdDebtRatio: PropTypes.isRequired
-	}).isRequired
+    }),
+    pristine: PropTypes.isRequired
+  }).isRequired
 }
 
 export default ClosingRequirements

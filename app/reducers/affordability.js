@@ -1,14 +1,15 @@
 //affordability.js
 
-import { AFFORDABILITY_NEW_INPUT } from '../actions'
+import { AFFORDABILITY_NEW_INPUT, AFFORDABILITY_TOGGLE_ADVANCED_PARAMS } from '../actions'
 import { getAffordabilityNumbers } from '../api'
 
 export const affordability = (state = [], action) => {
 	
 	switch(action.type){
 		case AFFORDABILITY_NEW_INPUT:
-			console.log("in affordability reducer: ", state, action)
-			return Object.assign({}, state, action.input, getAffordabilityNumbers(action.input))
+			return Object.assign({}, state, { data: getAffordabilityNumbers(action.input) })
+		case AFFORDABILITY_TOGGLE_ADVANCED_PARAMS:
+			return Object.assign({}, state, { showAdvancedParameters: state.showAdvancedParameters == true ? false : true  })		
 
 	}
 	return state;

@@ -5,7 +5,7 @@ import numeral  from 'numeral'
 import { styles } from '../styles/'
 
 const requirementMet = ( condition, success, failure ) => {
-	if(condition){
+	if(condition()){
 		return (<div className="alert alert-success alert-dismissible" role="alert">{success}</div>)
 	}
 	return (<div className="alert alert-danger alert-dismissible" role="alert">{failure}</div>)
@@ -35,12 +35,21 @@ const ClosingRequirements = ( { affordability } ) => {
               <td>Rehab Cost</td>
               <td>{numeral(data.rehabAmount).format('($0,0.00)')}</td>
             </tr>
+            <tr>
+              <td>Closing Cost</td>
+              <td>{numeral(data.closingCost).format('($0,0.00)')}</td>
+            </tr>
+            <tr>
+              <td>Appraisal Balance (only considered if purchase price is higher than the bank appraisal)</td>
+              <td>{numeral(data.appraisalBalance).format('($0,0.00)')}</td>
+            </tr>
             <tr style={styles.borderTop}>
               <td>Cash Before Reserve</td>
               <td>{numeral(data.cashBeforeReserve).format('($0,0.00)')}</td>
             </tr>
           </tbody>
         </table>
+
         { !pristine && requirementMet( 
         	() => data.cashBeforeReserve  >= 0,
         	"You meet the cash requirement",

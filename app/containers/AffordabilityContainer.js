@@ -6,23 +6,25 @@ import ClosingRequirements from '../components/ClosingRequirements'
 import MonthlyCost from '../components/MonthlyCost'
 import AffordabilityForm from '../components/AffordabilityForm'
 import { affordabilityNewInput, affordabilityToggleAdvancedParams } from '../actions'
-
+import { change, form } from 'redux-form'
 import { validateNotNegative, validate } from './validation'
 
 
 const affordabilityFormInitialValues = {
-  purchasePrice: 300000,
-  rehabAmount: 15000,
+  //purchasePrice: 300000,
+  rehabAmount: 0,
   mortgageLength: 30,
-  cashDownRate: 25,
+  cashDownRate: 20,
   interestRate: 4.1,
-  appraisalPrice: 300000,
-  monthlyPretaxIncome: 10000,
-  monthlyDebtPayment: 600,
-  cashInBank: 120000,
+  //monthlyPretaxIncome: 0,
+  //monthlyDebtPayment: 0,
+  //cashInBank: 120000,
   propTaxRate: 1.125,
   insurance: 600,
-  incomeTaxBracket: 33
+  incomeTaxBracket: 33,
+  stdDebtRatio: 43.5,
+  closingCostRate: 0.9,
+
 }
 
 
@@ -40,22 +42,18 @@ const validateAndSubmit = (dispatch) => (values) => {
   dispatch(affordabilityNewInput(values))
 }
 
-const toggleAdvancedParameters = (dispatch) => () => {
-  dispatch(affordabilityToggleAdvancedParams())
-}
 
-const AffordabilityContainer = ( { affordability, handleToggleAdvancedParameters, showAdvancedParameters, onSubmit } ) => {
+const AffordabilityContainer = ( { affordability, showAdvancedParameters, onSubmit } ) => {
 	return(
       <div>
         <div className="page-header">
-          <h2>Property Affordability</h2>
+          <h2>Affordability <small> can you afford this property?</small></h2>
         </div>
         
         <div className="col-xs-12 col-sm-6 col-md-4">
           <AffordabilityForm
             initialValues={affordabilityFormInitialValues}
             showAdvancedParameters={showAdvancedParameters}
-            handleToggleAdvancedParameters={handleToggleAdvancedParameters}
             onSubmit={onSubmit}
             />
         </div>
@@ -84,8 +82,10 @@ const mapStateToProps = (state) => {
   	}
 }
 const mapDispatchToProps = (dispatch) => ({
-  handleToggleAdvancedParameters: toggleAdvancedParameters(dispatch),   
   onSubmit: validateAndSubmit(dispatch),
+  // changeFormFieldValue:  (field, value) => {
+  //     dispatch(change(form, field, value))
+  // }
 })
 
 //const mapDispatchToProps = (dispatch) => ({})

@@ -10,7 +10,7 @@ export const rentalIncome = (state = [], action) => {
 			console.log("reducer toggle view...", state.showAdvancedParameters)
 			return Object.assign({}, state, { showAdvancedParameters: state.showAdvancedParameters == true ? false : true  })
 		case RENTAL_INCOME_NEW_INPUT:
-			return Object.assign({}, state, { data: getCashFlowStatement(action.input)})
+			return Object.assign({}, state, { data: getCashFlowStatement(action.input), pristine: false})
 			//return Object.assign({}, state, getCashFlowStatement(action.input))
 	}
 	return state;

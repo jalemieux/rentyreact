@@ -33,6 +33,13 @@ cashInBank
     var monthlyInsurance = insurance / 12
     var incomeTaxBracket = parseFloat(input.incomeTaxBracket) /100
     var cashInBank = parseFloat(input.cashInBank)
+    var stdDebtRatio = parseFloat(input.stdDebtRatio) /100
+    var closingCost = parseFloat(input.closingCostRate) /100 * purchasePrice
+    var appraisalPrice = parseFloat(input.appraisalPrice)
+
+    var appraisalBalance = purchasePrice + appraisalPrice
+    var appraisalBalance = appraisalBalance < 0 ? appraisalBalance : 0 
+ 
 
     var monthlyInterest = oneMonthDetails.interest * -1;
     var monthlyPropTax = purchasePrice * propTaxRate / 12;
@@ -43,13 +50,14 @@ cashInBank
     var monthlyPayment = monthlyInterest + monthlyPrincipal;
 
     var cashDownCost = purchasePrice * (cashDownRate)
-    var cashBeforeReserve = cashInBank + cashDownCost + rehabAmount
+    var cashBeforeReserve = cashInBank + cashDownCost + rehabAmount + closingCost + appraisalBalance
     var reserveRequirementCost = monthlyPIIT * 6
     var cashAfterReserve = cashBeforeReserve + reserveRequirementCost
     var monthlyDebtsCost = monthlyPIIT + monthlyDebtPayment;
     var debtRatio = (monthlyDebtsCost / monthlyPretaxIncome) * -1;
-
+   
     return {
+        closingCost,
         monthlyInterest,
         monthlyPropTax,
         monthlyPrincipal,
@@ -70,7 +78,9 @@ cashInBank
         purchasePrice, 
         incomeTaxBracket,
         debtRatio,
-        monthlyDebtsCost
+        monthlyDebtsCost,
+        stdDebtRatio, 
+        appraisalBalance
     }
 
 }

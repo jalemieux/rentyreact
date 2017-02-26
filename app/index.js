@@ -10,6 +10,7 @@ import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import App from './containers/App'
 import AffordabilityContainer from './containers/AffordabilityContainer'
 import RentalIncomeContainer from './containers/RentalIncomeContainer'
+import About from './components/About'
 import reducers from './reducers'
 
 import { state as initialState } from './api/state'
@@ -32,6 +33,7 @@ ReactDOM.render(
         <IndexRoute component={AffordabilityContainer} />
         <Route path="affordability" component={AffordabilityContainer}/>
         <Route path="cashflow" component={RentalIncomeContainer}/>
+        <Route path="about" component={About} />
       </Route>
     </Router>
   </Provider>,

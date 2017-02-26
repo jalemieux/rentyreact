@@ -27,15 +27,16 @@ const rentalIncomeFormInitialValues = {
 
 }
 
-const RentalIncomeContainer = ( { rentalIncome, showAdvancedParameters, handleToggleAdvancedParameters, onSubmit } ) => (
+const RentalIncomeContainer = ( { rentalIncome, showAdvancedParameters, onSubmit } ) => (
 		<div>
-        
+        <div className="page-header">
+          <h2>Rental Income Cashflow<small> How much cashflow this property will generate?</small></h2>
+        </div>
         <div className="col-xs-12 col-sm-6 col-md-4">
 
           <RentalIncomeForm
             initialValues={rentalIncomeFormInitialValues} 
             showAdvancedParameters={showAdvancedParameters}
-            handleToggleAdvancedParameters={handleToggleAdvancedParameters}
             onSubmit={onSubmit} />
         </div>
         <div className="col-xs-12 col-sm-6 col-md-8">
@@ -49,9 +50,6 @@ const RentalIncomeContainer = ( { rentalIncome, showAdvancedParameters, handleTo
 	)
 
 
-const toggleAdvancedParameters = (dispatch) => () => {
-  dispatch(rentalIncomeToggleAdvancedParams())
-}
 
 const validateAndSubmit = (dispatch) => (values) => {
   console.log("validateAndSubmit: ", values)
@@ -78,7 +76,6 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  handleToggleAdvancedParameters: toggleAdvancedParameters(dispatch),   
   onSubmit: validateAndSubmit(dispatch)
 })
 

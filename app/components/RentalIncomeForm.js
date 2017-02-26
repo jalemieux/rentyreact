@@ -9,12 +9,21 @@ import { styles } from '../styles/'
 
 import { renderFormGroupWAddon, dollarAddonDecorator, percentAddonDecorator, nullDecorator } from './Helpers'
 
+
+import { rentalIncomeToggleAdvancedParams } from '../actions'
+
+const toggleAdvancedParameters = (dispatch) => (e) => {
+  e.preventDefault();
+  dispatch(rentalIncomeToggleAdvancedParams())
+}
+
+
 const RentalIncomeForm = (props) => {
-    const { error, handleSubmit, pristine, submitting, onSubmit, showAdvancedParameters, handleToggleAdvancedParameters } = props    
+    const { error, handleSubmit, pristine, submitting, onSubmit, showAdvancedParameters } = props    
     return (
         <div className="panel panel-primary">{/* Monthly Cost */}
           <div className="panel-heading">
-            <h2 className="panel-title">Property Details</h2>
+            <h2 className="panel-title">Numbers</h2>
           </div>
           <div className="panel-body">
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -28,10 +37,8 @@ const RentalIncomeForm = (props) => {
                 addonDecorator={dollarAddonDecorator} />
 
             <hr />
-            <a href="#" onClick={ handleToggleAdvancedParameters }><h5 className="panel-tittle">Advanced Parameters<small> <span className="glyphicon glyphicon-chevron-down"></span></small></h5></a>
+            <a href="#" onClick={ toggleAdvancedParameters(props.dispatch) }><h5 className="panel-tittle">Advanced Parameters<small> <span className="glyphicon glyphicon-chevron-down"></span></small></h5></a>
               <div style={ showAdvancedParameters ? styles.visible: styles.hidden} >
-                <Field component={renderFormGroupWAddon} name="taxBracket" label="Tax Bracket" type="numeric" 
-                            addonDecorator={percentAddonDecorator} />                
                 <Field component={renderFormGroupWAddon} name="cashDownRate" label="Cash Down Rate" type="numeric" 
                             addonDecorator={percentAddonDecorator} />                
                 <Field component={renderFormGroupWAddon} name="mortgageLength" label="Mortgage Length (in years)" type="numeric" 
@@ -48,6 +55,9 @@ const RentalIncomeForm = (props) => {
                             addonDecorator={percentAddonDecorator} /> 
                 <Field component={renderFormGroupWAddon} name="propertyTaxRate" label="Property Tax Rate (/year)" type="numeric" 
                             addonDecorator={percentAddonDecorator} /> 
+                <Field component={renderFormGroupWAddon} name="taxBracket" label="Tax Bracket" type="numeric" 
+                            addonDecorator={percentAddonDecorator} />                
+                
             </div>
 		        
            { error && <div className="alert alert-danger" role="alert">{error}</div>}

@@ -110,6 +110,8 @@ let AffordabilityForm = ( props ) => {
                 addonDecorator={percentAddonDecorator} />
               <Field component={renderFormGroupWAddon} name="insurance" label="Insurance Prenium (/year)" type="numeric" 
                 addonDecorator={dollarAddonDecorator} />
+                <Field component={renderFormGroupWAddon} name="hoa" label="Home Owner Assoc. Fees (/year)" type="numeric" 
+                addonDecorator={dollarAddonDecorator} />
               <Field component={renderFormGroupWAddon} name="incomeTaxBracket" label="Income Tax Bracket" type="numeric" 
                 addonDecorator={percentAddonDecorator} />    
               <Field component={renderFormGroupWAddon} name="stdDebtRatio" label="Standard Debt Ratio" type="numeric" 

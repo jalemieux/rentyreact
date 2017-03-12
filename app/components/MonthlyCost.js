@@ -16,7 +16,7 @@ const MonthlyCost = ( { affordability } ) => {
 	  	<table className="table table-hover">
 	      <tbody>
 	        <tr>
-	          <td>Monthly Insurance</td>
+	          <td>Monthly Interest</td>
 	          <td>{numeral(data.monthlyInterest).format('($0,0.00)')}</td>
 	        </tr>
 	        <tr>
@@ -42,6 +42,10 @@ const MonthlyCost = ( { affordability } ) => {
 	        <tr>
 	          <td>Monthly Insurance</td>
 	          <td>{numeral(data.monthlyInsurance).format('($0,0.00)')}</td>
+	        </tr>
+	        <tr>
+	          <td>Monthly HOA</td>
+	          <td>{numeral(data.monthlyHoa).format('($0,0.00)')}</td>
 	        </tr>
 	        <tr>
 	          <td>Monthly Principal</td>

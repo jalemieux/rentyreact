@@ -24,6 +24,7 @@ const affordabilityFormInitialValues = {
   incomeTaxBracket: 33,
   stdDebtRatio: 43.5,
   closingCostRate: 0.9,
+  hoa: 0
 
 }
 

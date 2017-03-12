@@ -36,18 +36,22 @@ cashInBank
     var stdDebtRatio = parseFloat(input.stdDebtRatio) /100
     var closingCost = parseFloat(input.closingCostRate) /100 * purchasePrice
     var appraisalPrice = parseFloat(input.appraisalPrice)
+    var hoaFees = parseFloat(input.hoa) * -1
+
 
     var appraisalBalance = purchasePrice + appraisalPrice
     var appraisalBalance = appraisalBalance < 0 ? appraisalBalance : 0 
  
 
+    var monthlyHoa = hoaFees == 0 ? 0 : hoaFees /12
     var monthlyInterest = oneMonthDetails.interest * -1;
     var monthlyPropTax = purchasePrice * propTaxRate / 12;
     var monthlyPrincipal = oneMonthDetails.principal * -1;
-    var monthlyPIIT = monthlyInterest + monthlyPropTax + monthlyPrincipal + monthlyInsurance;
+    var monthlyPIIT = monthlyInterest + monthlyPropTax + monthlyPrincipal + monthlyInsurance + monthlyHoa;
     var monthlyTaxSavings = (monthlyInterest + monthlyPropTax) * incomeTaxBracket
     var monthlyCostAfterTax = monthlyPIIT - monthlyTaxSavings;
     var monthlyPayment = monthlyInterest + monthlyPrincipal;
+    
 
     var cashDownCost = purchasePrice * (cashDownRate)
     var cashBeforeReserve = cashInBank + cashDownCost + rehabAmount + closingCost + appraisalBalance
@@ -66,6 +70,7 @@ cashInBank
         monthlyTaxSavings,
         monthlyCostAfterTax,
         monthlyPayment, 
+        monthlyHoa,
         cashInBank,
         cashDownCost,
         rehabAmount, 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Router, Route, IndexRoute, browserHistory } from 'react-router'
+import { Router, Route, IndexRoute, hashHistory } from 'react-router'
 import ReactDOM from 'react-dom'
 
 import { createStore, combineReducers } from 'redux'
@@ -22,7 +22,7 @@ const store = createStore(
   initialState
 )
 
-const history = syncHistoryWithStore(browserHistory, store)
+const history = syncHistoryWithStore(hashHistory, store)
 
 
 ReactDOM.render(

@@ -1,5 +1,8 @@
 // In webpack.config.js
 var HtmlWebpackPlugin = require('html-webpack-plugin')
+
+var CopyWebpackPlugin = require('copy-webpack-plugin');
+
 var HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
   template: __dirname + '/app/index.html',
   filename: 'index.html',
@@ -26,6 +29,9 @@ module.exports = {
   },
   plugins: [
     HTMLWebpackPluginConfig,
+    new CopyWebpackPlugin([
+        { from: 'static' }
+    ])
   ],
   devServer: {
       historyApiFallback: true

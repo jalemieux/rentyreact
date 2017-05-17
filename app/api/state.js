@@ -1,5 +1,5 @@
 
-export const state = {
+export const state1 = {
 	affordability: {
 		data: {
 			monthlyInterest: 0,
@@ -35,6 +35,42 @@ export const state = {
 		},
 		pristine: true
 
+	},
+	user: {
+		id: 'jalemieux@gmail.com',
+		token: 'asdasdasdasdasdasdda'
+
+	},
+	formZ: {
+		fetching: false, 
+		data: null, 
+		error: null,
+		input: {
+			email: ''
+		}
+	}, 
+	signIn: {
+		fetching: false, 
+		data: null, 
+		error: null,
+		input: {
+			userid: '',
+			password: '',
+		},
 	}
 }
 
+export const state = {
+	foo: "foo!",
+	signIn: {
+		fetching: false, 
+		data: null, 
+		error: null,
+		input: {
+			userid: '',
+			password: '',
+		},
+	},
+	user: {
+	},
+}

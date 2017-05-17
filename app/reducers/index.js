@@ -2,24 +2,33 @@
 import { combineReducers } from 'redux'
 import { reducer as reduxFormReducer } from 'redux-form'
 
-import { dummy } from './dummy'
 import { affordability } from './affordability'
 import { rentalIncome } from './rentalIncome'
+import { sessionReducer } from './sessionReducer'
+
+//import { formZReducer } from './formZ'
+import { signinReducer } from './signinReducer'
+
+import { exampleReducer } from './exampleReducer'
 
 
-// const reducers = combineReducers({
-//   affordability,	
-//   form: reduxFormReducer,
-//   dummy,
-// })
-
-const reducers = {
-	affordability,
-	form: reduxFormReducer,
-	rentalIncome, 
+export const reducers = {
+  foo: exampleReducer,
+  signIn: signinReducer,
+  user: sessionReducer
 }
 
-export default reducers
+// export const reducers = combineReducers({
+//   foo: exampleReducer,
+//   // affordability,
+//   // form: reduxFormReducer,
+//   // rentalIncome,
+//  foo: exampleReducer,
+//   // //formZ: formZReducer , 
+//   signIn: signinReducer,
+// })
+
+
 
 
 

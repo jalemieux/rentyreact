@@ -13,7 +13,17 @@ export const errorMessage = (error) => (
    <span class="help-block">{error}</span>
 )
 
-export const renderFormGroupWAddon = ( { input, label, name, type, placeholder, addonDecorator, meta: { touched, error }}) => (
+export const renderFormField = ( { input, name, label, type, placeholder, meta : { touched, error } } ) => (
+  <div className={formGroupClasses(error)}>
+    <label htmlFor={name} className="control-label">{label}</label>
+    <div>
+      <input {...input} type={type} className="form-control" placeholder={placeholder} />
+    </div>
+    {error && errorMessage(error) }
+  </div>
+)
+
+export const renderFormGroupWAddon = ( { input, name, label, type, placeholder, addonDecorator, meta: { touched, error }}) => (
   <div className={formGroupClasses(error)}>
     <label htmlFor={name} className="control-label">{label}</label>
     <div className="input-group">
@@ -22,6 +32,8 @@ export const renderFormGroupWAddon = ( { input, label, name, type, placeholder, 
     {error && errorMessage(error) }
   </div>
 )
+
+
 
 export const nullDecorator = ( inputField ) => ( inputField )
 

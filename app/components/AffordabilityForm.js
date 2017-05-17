@@ -54,7 +54,7 @@ const toggleAdvancedParameters = (dispatch) => (e) => {
   dispatch(affordabilityToggleAdvancedParams())
 }
 
-let AffordabilityForm = ( props ) => {
+var AffordabilityForm = ( props ) => {
     const { error, handleSubmit, pristine, submitting, onSubmit, showAdvancedParameters, 
       purchasePrice,
       cashDownAmount,

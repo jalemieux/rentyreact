@@ -8,10 +8,10 @@ export const affordabilityNewInput = (input) => {
 export const RENTAL_INCOME_TOGGLE_ADVANCED_PARAMS = 'RENTAL_INCOME_TOGGLE_ADVANCED_PARAMS'
 
 export const rentalIncomeToggleAdvancedParams = ( ) => {
-	return { type: RENTAL_INCOME_TOGGLE_ADVANCED_PARAMS, null }
+	return { type: RENTAL_INCOME_TOGGLE_ADVANCED_PARAMS }
 }
 export const affordabilityToggleAdvancedParams = () => {
-	return { type : AFFORDABILITY_TOGGLE_ADVANCED_PARAMS, null }
+	return { type : AFFORDABILITY_TOGGLE_ADVANCED_PARAMS }
 }
 
 export const RENTAL_INCOME_NEW_INPUT = 'RENTAL_INCOME_NEW_INPUT'
@@ -19,3 +19,11 @@ export const RENTAL_INCOME_NEW_INPUT = 'RENTAL_INCOME_NEW_INPUT'
 export const rentalIncomeNewInput = ( input ) => {
 	return { type: RENTAL_INCOME_NEW_INPUT, input }
 }
+
+// login actions
+export const SIGNIN_SUBMIT = 'SIGNIN_SUBMIT'
+export const signInSubmit = ( input ) => {
+  return { type: SIGNIN_SUBMIT, input }
+}
+
+

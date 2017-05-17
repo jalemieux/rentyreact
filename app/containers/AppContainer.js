@@ -1,14 +1,20 @@
 //AppContainer.js
 import React from 'react'
 import { Link } from 'react-router'
+import { connect } from 'react-redux'
 import NavbarTools from '../components/NavbarTools'
 
+import { 
+  invalidateSession
+} from '../reducers/sessionReducer'
 
 const App = ( props ) => {
   let { children } = props
   return (
   <div>
-    <NavbarTools />
+    <NavbarTools 
+      {...props}
+    />
     <div className="container">
       <div className="row">
         {children}
@@ -20,4 +26,22 @@ const App = ( props ) => {
     </div>
   </div>
 )}
-export default App
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleSignOut: () => {
+      dispatch(invalidateSession())
+    },
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App)

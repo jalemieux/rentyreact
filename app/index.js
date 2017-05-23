@@ -18,13 +18,15 @@ import {
   routerMiddleware,
  routerReducer } from 'react-router-redux'
 
-
 import thunkMiddleware from 'redux-thunk'
 
 import ExampleContainer from './containers/ExampleContainer'
 
 import AppContainer from './containers/AppContainer'
 import SignInContainer from './containers/SignInContainer'
+import SignUpContainer from './containers/SignUpContainer'
+import ConfirmationContainer from './containers/ConfirmationContainer'
+
 import { authenticate } from './hoc/authenticate'
 import Home from './components/Home'
 // import AffordabilityContainer from './containers/AffordabilityContainer'
@@ -37,9 +39,7 @@ import Home from './components/Home'
 
 import { reducers } from './reducers'
 import { state as initialState } from './api/state'
-
 import { createLogger } from 'redux-logger'
-
 
 
 
@@ -67,7 +67,8 @@ ReactDOM.render(
         <Route path="/auth" component={authenticate(ExampleContainer)} />
       </Route>
       <Route path="/signin" component={SignInContainer} />
-      
+      <Route path="/signup" component={SignUpContainer} />
+      <Route path="/confirmation" component={ConfirmationContainer} />
       {/*
       <Route path="/" component={AppContainer}>
         <Route path="signin" component={SignInContainer} />

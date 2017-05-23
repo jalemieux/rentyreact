@@ -8,8 +8,8 @@ import {
   CognitoUserAttribute,
   CognitoUser } from 'amazon-cognito-identity-js';
 
-
-export const signUp = ( email, password ) => {
+// --------- SIGN UP -------------- //
+export const signUp = ( email, password = null ) => {
   const userPool = new CognitoUserPool({
     UserPoolId: creds.cognito.USER_POOL_ID,
     ClientId: creds.cognito.APP_CLIENT_ID
@@ -29,6 +29,22 @@ export const signUp = ( email, password ) => {
   });
 }
 
+export const confirmation = ( userid, code ) => {
+  const userPool = new CognitoUserPool({
+    UserPoolId: creds.cognito.USER_POOL_ID,
+    ClientId: creds.cognito.APP_CLIENT_ID
+  });
+  const user = new CognitoUser({ Username: userid, Pool: userPool });
+  return new Promise(( resolve, reject) => {
+    user.confirmRegistration(code, true, function(err, result) {
+      if (err) return reject(err)
+      resolve(result)
+    });  
+  })
+  
+}
+
+// --------- SIGN IN -------------- //
 export const signIn = (username, password) => {
   const userPool = new CognitoUserPool({
     UserPoolId: creds.cognito.USER_POOL_ID,
@@ -50,6 +66,8 @@ export const signIn = (username, password) => {
   ));
 }
 
+// ----------- SIGN OUT -----------//
+
 export const signOut = () => {
    const cognitoUser = getCurrentUser()
    console.log("signOut: ", cognitoUser)
@@ -57,6 +75,9 @@ export const signOut = () => {
       cognitoUser.signOut()
     }
 }
+
+
+// ----------- SESSION -----------//
 
 export const getCurrentUser = () => {
   const userPool = new CognitoUserPool({

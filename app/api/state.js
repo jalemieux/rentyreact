@@ -71,6 +71,20 @@ export const state = {
 			password: '',
 		},
 	},
+	signUp: {
+		fetching: false, 
+		data: null, 
+		error: null,
+		input: {
+		},
+	},
+	confirmation: {
+		fetching: false, 
+		data: null, 
+		error: null,
+		input: {
+		},
+	},
 	user: {
 	},
 }

@@ -8,6 +8,8 @@ import { sessionReducer } from './sessionReducer'
 
 //import { formZReducer } from './formZ'
 import { signinReducer } from './signinReducer'
+import { signupReducer } from './signupReducer'
+import { confirmationReducer } from './confirmationReducer'
 
 import { exampleReducer } from './exampleReducer'
 
@@ -15,7 +17,9 @@ import { exampleReducer } from './exampleReducer'
 export const reducers = {
   foo: exampleReducer,
   signIn: signinReducer,
-  user: sessionReducer
+  user: sessionReducer,
+  signUp: signupReducer, 
+  confirmation: confirmationReducer
 }
 
 // export const reducers = combineReducers({

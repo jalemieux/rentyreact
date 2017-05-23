@@ -55,6 +55,13 @@ export function refreshUserDetails(user) {
   }
 }
 
+export function refreshUserid(userid){
+  return {
+    type: 'USER_ID_REFRESH',
+    userid: userid
+  }
+}
+
 export const sessionReducer = (state = [], action) => {
   switch(action.type){
     case 'USER_AUTHED':
@@ -79,6 +86,10 @@ export const sessionReducer = (state = [], action) => {
     case 'USER_DETAILS_REFRESH':
       return Object.assign({}, state, {
         userid: action.user['email']
+      })
+    case 'USER_ID_REFRESH':
+      return Object.assign({}, state, {
+        userid: action.userid
       })
   }
   return state;

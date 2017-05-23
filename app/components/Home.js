@@ -6,7 +6,7 @@ const Home = ( props ) => {
   return (
     <div className="col-xs-12 col-sm-6 col-md-4">
       <h1>Home</h1>
-      <Link to="/signin">sign in!</Link>
+      <Link to="/signin">sign in</Link> or <Link to="/signup">sign up</Link>
     </div>
     )
 }

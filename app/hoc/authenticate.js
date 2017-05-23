@@ -1,10 +1,15 @@
 //auth.js
 import React from 'react'
-import {
-  getCurrentSession,
-  getCurrentUserAttributes,
-  getCurrentUser
-} from '../api/aws'
+// import {
+//   getCurrentSession,
+//   getCurrentUserAttributes,
+//   getCurrentUser
+// } from '../api/aws'
+import { ApiFactory } from '../factories/ApiFactory'
+const getCurrentUser = ApiFactory("getCurrentUser")
+const getCurrentUserAttributes = ApiFactory("getCurrentUserAttributes")
+const getCurrentSession = ApiFactory("getCurrentSession")
+
 
 import { 
   refreshToken,
@@ -50,18 +55,20 @@ export const authenticate = (WrappedComponent) => {
       let { hanldeReroute, handleRefreshToken, handleRefreshUserDetails } = this.props
       let { isAuthenticated } = this
       let user = getCurrentUser()
+      console.log("user: ", user)
       if(user != null){
         user.getSession( (err, session) => {
           if(err){
-            console.log("error: ", err)
+            //console.log("error: ", err)
             handleReroute('/signin')
             return
           }
-          handleRefreshUserDetails(session.getIdToken().getJwtToken())    
+          //console.log("session: ", session)
+          handleRefreshToken(session.getIdToken().getJwtToken())    
         })
         user.getUserAttributes( (err, user) => {
           if(err){
-            console.log("error: ", err)
+            //console.log("error: ", err)
             handleReroute('/signin')
             return
           }
@@ -69,22 +76,12 @@ export const authenticate = (WrappedComponent) => {
           for(let prop of user){
             userDetails[prop.getName()] = prop.getValue()
           }
+          //console.log("userdetails: ", userDetails)
           handleRefreshUserDetails(userDetails)
         })
+      }else{
+        hanldeReroute('/signin')
       }
-      // getCurrentSession(
-      //   (session) => {
-      //     console.log("got a session! ", session)
-      //     getCurrentUserAttributes(
-      //       (user) => console.log("user details obj: ", user),
-      //       (err) => console.log("user details error: ", err)
-      //     )
-      //     updateToken(session.getIdToken().getJwtToken())
-      //   },
-      //   (err) => {
-      //     handleReroute('/signin')
-      //   }
-      // )
     }
     render(){
       let { token } = this.props.user

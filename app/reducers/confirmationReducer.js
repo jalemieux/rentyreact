@@ -2,7 +2,9 @@
 
 import { push } from 'react-router-redux'
 
-import { confirmation } from '../api/aws'
+//import { confirmation } from '../api/aws'
+import { ApiFactory } from '../factories/ApiFactory'
+const confirmation = ApiFactory("confirmation")
 
 export function confirmationFetching(){
   return { 

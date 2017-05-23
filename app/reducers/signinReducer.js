@@ -1,7 +1,11 @@
 //SignInContainer.js
 
 import { refreshSession } from './sessionReducer'
-import { signIn } from '../api/aws'
+
+//import { signIn } from '../api/aws'
+import { ApiFactory } from '../factories/ApiFactory'
+const signIn = ApiFactory("signIn")
+
 
 import { push } from 'react-router-redux'
 
@@ -35,7 +39,7 @@ export function signInFieldChangeValue(field, value){
 }
 
 
-export function signInFetch(input){
+export function signInFetch(input, path = '/auth'){
   return function (dispatch) {
 
     dispatch(signInFetching())
@@ -43,7 +47,7 @@ export function signInFetch(input){
       .then( token => {
         dispatch(refreshSession(input.userid, token))
         dispatch(signInFetched(token))
-        dispatch(push('/auth'))
+        dispatch(push(path))
       })
       .catch(err => {
         dispatch(signInFetchedErr(err))        

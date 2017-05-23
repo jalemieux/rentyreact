@@ -8,10 +8,14 @@ import {
   userSignOut
 } from '../reducers/user'
 
-import {
-  getUserToken,
-  getCurrentUser
-} from '../api/aws'
+// import {
+//   getUserToken,
+//   getCurrentUser
+// } from '../api/aws'
+
+import { ApiFactory } from '../factories/ApiFactory'
+const getUserToken = ApiFactory("getUserToken")
+const getCurrentUser = ApiFactory("getCurrentUser")
 
 const isUserSignedIn = () => {
   return getUserToken(getCurrentUser()) != null

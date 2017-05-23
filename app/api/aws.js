@@ -8,6 +8,8 @@ import {
   CognitoUserAttribute,
   CognitoUser } from 'amazon-cognito-identity-js';
 
+
+
 // --------- SIGN UP -------------- //
 export const signUp = ( email, password = null ) => {
   const userPool = new CognitoUserPool({
@@ -118,3 +120,15 @@ export const getCurrentUserAttributes = (success, failure) => {
         return success(result)
     }); 
 }}
+
+export default {
+  signUp: signUp,
+  confirmation: confirmation,
+  signIn: signIn,
+  signOut: signOut,
+  getCurrentUser: getCurrentUser,
+  getUserToken: getUserToken,
+  getCurrentUserAttributes: getCurrentUserAttributes,
+  getCurrentSession: getCurrentSession
+}
+

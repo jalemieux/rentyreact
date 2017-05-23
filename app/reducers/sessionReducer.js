@@ -1,6 +1,5 @@
 //user.js
 
-//import { login } from '../api/aws'
 
 const login = (userid, password) => (
   new Promise.resolve('some_weird_token')
@@ -8,15 +7,10 @@ const login = (userid, password) => (
 
 import { push } from 'react-router-redux'
 
-// export function userSignIn(userid, token){
-//   return {
-//     type: 'USER_AUTHED',
-//     token: token,
-//     userid: userid
-//   }
-// }
+//import { signOut } from '../api/aws'
+import { ApiFactory } from '../factories/ApiFactory'
+const signOut = ApiFactory("signOut")
 
-import { signOut } from '../api/aws'
 
 export function signedOut(){
   return {

@@ -5,3 +5,8 @@ export const creds = {
     APP_CLIENT_ID : '14q956jjfeirg9uct0msho70i',
   }
 };
+
+
+export const api = {
+  env: "live"
+}

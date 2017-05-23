@@ -124,7 +124,7 @@ export default connect(
   (dispatch) => {
     return {
       handleSubmit: (input) => {
-        dispatch(signInFetch(input))
+        dispatch(signInFetch(input, '/dashboard'))
       },
       handleFieldChange: (field, value) => {
         dispatch(signInFieldChangeValue(field, value))
